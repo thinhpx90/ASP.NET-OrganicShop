@@ -1,0 +1,90 @@
+﻿ @model LeafShop.Models.DatHang
+
+@{
+    ViewBag.Title = "Chi tiết đặt hàng";
+}
+
+<h2 style="font-size:30px;">Chi tiết đặt hàng</h2>
+<style>
+    th, td {
+        padding: 10px;
+    }
+
+    div a {
+        color: white;
+    }
+
+        div a:hover {
+            color: white;
+        }
+
+    .w-50 {
+        width: 50%;
+    }
+</style>
+<div>
+    <hr />
+    <h2 style="margin-top:10px;margin-bottom:10px;">Đơn hàng</h2>
+    <table border="1">
+        <tr>
+            <th>Mã đơn hàng</th>
+            <td>@Model.MaDatHang</td>
+        </tr>
+        <tr>
+            <th>Tên khách hàng</th>
+            <td>@Model.KhachHang.TenKhachHang</td>
+        </tr>
+        <tr>
+            <th>Tên nhân viên xử lý</th>
+            <td>@(Model.MaNhanVien != null ? Model.NhanVien.TenNhanVien : String.Empty)</td>
+        </tr>
+        <tr>
+            <th>Tổng hàng</th>
+            <td></td>
+        </tr>
+        <tr>
+            <th>Ngày khởi tạo</th>
+            <td>@Model.NgayKhoiTao</td>
+        </tr>
+        <tr>
+            <th>Ngày giao hàng</th>
+            <td>@Model.NgayGiaoHang</td>
+        <tr>
+            <th>Ghi chú</th>
+            <td>@Model.GhiChu</td>
+        </tr>
+        <tr>
+            <th>Địa chỉ</th>
+            <td>@Model.DiaChi</td>
+        </tr>
+        <tr>
+            <th>Trạng thái</th>
+            <td>@(Model.TrangThai?"Chưa hoàn thành":"Hoàn thành")</td>
+        </tr>
+        </tr>
+    </table>
+    <h2 style="margin-top:10px;margin-bottom:10px;">Danh sách sản phẩm</h2>
+    <table border="1">
+        <tr>
+            <th>Mã sản phẩm</th>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+        </tr>
+
+        @foreach (var sp in ViewBag.listDH)
+        {
+    <tr>
+        <td>@sp.SanPham.MaSanPham</td>
+        <td>@sp.SanPham.TenSanPham</td>
+        <td>@sp.SoLuong</td>
+        <td>@sp.DonGia</td>
+    </tr>
+                }
+            
+        </table>
+</div>
+<p>
+    <div class="btn btn-primary">@Html.ActionLink("Cập nhật", "Edit", new { id = Model.MaDatHang }) </div>
+    <div class="btn btn-warning">@Html.ActionLink("Quay trở lại", "Index")</div>
+</p>

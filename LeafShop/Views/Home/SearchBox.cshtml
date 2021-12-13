@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "SearchBox";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-lg-5 col-md-8 ml-auto mr-auto col-10">
+    <div class="categorie-search-box">
+        @using (Html.BeginForm("Detail", "SanPham", FormMethod.Get))
+        {
+            <input name="SearchString" type="text" placeholder="Tìm kiếm">
+            <button type="submit"><i class="lnr lnr-magnifier"></i></button>}
+    </div>
+</div>
+

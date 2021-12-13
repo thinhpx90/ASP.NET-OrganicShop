@@ -1,0 +1,107 @@
+﻿@model LeafShop.Models.SanPham
+
+@{
+    ViewBag.Title = "Xóa sản phẩm";
+}
+<style>
+    th, td {
+        padding: 10px;
+    }
+
+    div a {
+        color: white;
+    }
+
+        div a:hover {
+            color: white;
+        }
+
+    .w-50 {
+        width: 50%;
+    }
+</style>
+<h2 style="font-size:30px">Xóa sản phẩm</h2>
+<hr />
+<div style="display:flex;justify-content:center;width:100%">
+    <div class="w-50">
+        <table border="1" style="width:100%;">
+            <tr>
+                <th>Tên danh mục</th>
+                <td>@ViewBag.TenDM</td>
+            </tr>
+            <tr>
+                <th>Tên thương hiệu</th>
+                <td>@ViewBag.TenTH</td>
+            </tr>
+            <tr>
+                <th>Tên sản phẩm</th>
+                <td>@Model.TenSanPham</td>
+            </tr>
+            <tr>
+                <th>Đơn vị tính</th>
+                <td>@Model.DonViTinh</td>
+            </tr>
+            <tr>
+                <th>Số lượng còn</th>
+                <td>@Model.SoLuong</td>
+            </tr>
+            <tr>
+                <th>Số lượng đã bán</th>
+                <td>@Model.SoLuongBan</td>
+            </tr>
+            <tr>
+                <th>Đơn giá</th>
+                <td>@Model.DonGia</td>
+            </tr>
+            <tr>
+                <th>Mô tả</th>
+                <td>
+                    @{
+                        HtmlString msg = new HtmlString(Model.MoTa);
+                                }
+                                @msg
+                            </td>
+            </tr>
+            <tr>
+                <th>Ngày khởi tạo</th>
+                <td>@{ var date = Model.NgayKhoiTao.HasValue ? Model.NgayKhoiTao.Value.ToString("dd-MM-yyyy") : String.Empty; } @date</td>
+            </tr>
+            <tr>
+                <th>Ngày cập nhật</th>
+                <td>@{ var date2 = Model.NgayCapNhat.HasValue ? Model.NgayCapNhat.Value.ToString("dd-MM-yyyy") : String.Empty; } @date2</td>
+            </tr>
+            <tr>
+                <th>Hình minh họa</th>
+                <td>@{ var ImagePath = Model.HinhMinhHoa != null ? Model.HinhMinhHoa : "~/Content/image/h0.png"; } <img src="@Url.Content(ImagePath)" style="width: 150px; height: 150px;" /></td>
+            </tr>
+
+        </table>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color" style="margin-top:10px;text-align:center;">
+                <input type="submit" value="Xoá" class="btn btn-danger" onclick="return confirmDelete()" />
+                <div class="btn btn-warning">@Html.ActionLink("Quay trở lại", "Index")</div>
+            </div>
+        }
+    </div>
+</div>
+@if (ViewBag.Error != null)
+{
+    <br />
+    <div class="alert alert-danger col-lg-2" role="alert">@ViewBag.Error</div>
+}
+
+<script>
+    function confirmDelete() {
+        var result = confirm('Bạn có chắc chắn muốn XÓA?')
+        if (result) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+</script>

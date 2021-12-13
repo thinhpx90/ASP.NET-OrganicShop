@@ -1,0 +1,42 @@
+﻿@model LeafShop.Models.Taikhoan
+
+@{
+    ViewBag.Title = "Chi tiết tài khoản";
+}
+
+<h2>Chi tiết tài khoản</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NhanVien.TenNhanVien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NhanVien.TenNhanVien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PASSWORD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PASSWORD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantri)
+        </dt>
+
+        <dd>
+            @(Model.Quantri?"Quản trị viên":"Nhân viên")
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Cập nhật", "Edit", new { id = Model.USERNAME }) |
+    @Html.ActionLink("Quay trở lại", "Index")
+</p>

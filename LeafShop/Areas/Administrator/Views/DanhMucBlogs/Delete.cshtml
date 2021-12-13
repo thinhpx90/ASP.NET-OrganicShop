@@ -1,0 +1,63 @@
+﻿@model LeafShop.Models.DanhMucBlog
+
+@{
+    ViewBag.Title = "Xóa danh mục bài viết";
+}
+<style>
+    th, td {
+        padding: 10px;
+    }
+
+    div a {
+        color: white;
+    }
+
+        div a:hover {
+            color: white;
+        }
+
+    .w-50 {
+        width: 50%;
+    }
+</style>
+
+
+<h3>Xoá danh mục blog</h3>
+<div>
+    <hr />
+    <table border="1">
+        <tr>
+            <th>Mã danh mục</th>
+            <td>@Model.MaDanhMucBlog</td>
+        </tr>
+        <tr>
+            <th>Tên danh mục</th>
+            <td>@Model.TenDanhMucBlog</td>
+        </tr>
+    </table>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color" style="margin-top:10px;">
+            <input type="submit" value="Xoá" class="btn btn-danger" onclick="return confirmDelete()" />
+            <div class="btn btn-warning">@Html.ActionLink("Quay trở lại", "Index")</div>
+        </div>
+    }
+</div>
+<script>
+    function confirmDelete() {
+        var result = confirm('Bạn có chắc chắn muốn XÓA?')
+        if (result) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+</script>
+@if (ViewBag.Error != null)
+{
+    <br />
+    <div class="alert alert-danger col-lg-2" role="alert">@ViewBag.Error</div>
+}

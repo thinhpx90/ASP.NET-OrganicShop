@@ -1,0 +1,73 @@
+﻿@model LeafShop.Models.NhanVien
+
+@{
+    ViewBag.Title = "Thông tin nhân viên";
+}
+
+<h2>Chi tiết nhân viên</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNhanVien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNhanVien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GioiTinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Avatar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Avatar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgaySinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DienThoai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Cập nhật", "Edit", new { id = Model.MaNhanVien }) |
+    @Html.ActionLink("Quay trở lại", "Index")
+</p>

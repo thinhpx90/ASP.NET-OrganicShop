@@ -1,0 +1,44 @@
+﻿@model LeafShop.Models.DanhMucBlog
+
+@{
+    ViewBag.Title = "Thêm mới danh mục bài viết";
+}
+<style>
+    div a {
+        color: white;
+    }
+
+        div a:hover {
+            color: white;
+        }
+</style>
+<h2 style="font-size:30px;">Thêm mới danh mục bài viết</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="pt-4 pb-3">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Tên danh mục blog</label>
+                        @Html.EditorFor(model => model.TenDanhMucBlog, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenDanhMucBlog, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                        <div class="btn btn-warning">@Html.ActionLink("Quay trở lại", "Index")</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <br />
+    <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+}

@@ -1,0 +1,100 @@
+﻿@model LeafShop.Models.NhanVien
+
+@{
+    ViewBag.Title = "Thêm nhân viên";
+}
+
+<h2 style="font-size: 30px">Thêm mới nhân viên</h2>
+<hr />
+<style>
+    div a {
+        color: white;
+    }
+        div a:hover {
+            color: white;
+        }
+</style>
+@using (Html.BeginForm("Create", "NhanVien", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="pt-4 pb-3">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Tên nhân viên</label>
+                        @Html.EditorFor(model => model.TenNhanVien, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenNhanVien, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="md-form md-outline mt-0">
+                        <br />
+                        <label for="form15">Giới tính</label>
+                        <div class="form-group row">
+                            @Html.RadioButtonFor(model => model.GioiTinh, true)
+                            <span>Nam</span>
+
+                            @Html.RadioButtonFor(model => model.GioiTinh, false)
+                            <span>Nữ</span>
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Avatar</label>
+                        <br />
+                        <img id="output" class="img-rounded" alt="Ảnh" width="130" height="130" src="~/Content/image/h0.png" />
+
+                        <input type="file" id="uploadhinh" name="ImagesFile" accept="image/*" onchange="loadFile(event)" style="margin-top: 20px" />
+                    </div>
+
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Email</label>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Điện thoại</label>
+                        @Html.EditorFor(model => model.DienThoai, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DienThoai, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Địa chỉ</label>
+                        @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Ngày sinh</label>
+                        @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                        <div class="btn btn-warning"> @Html.ActionLink("Quay trở lại", "Index")</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    var loadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>
+
+@if (ViewBag.Error != null)
+{
+    <br />
+    <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+}

@@ -1,0 +1,430 @@
+﻿@model LeafShop.Models.SanPham
+<script src="https://kit.fontawesome.com/e38e0bb8bb.js" crossorigin="anonymous"></script>
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="page-title">
+    <div class="container clearfix">
+
+        <ol class="breadcrumb col-md-6 col-sm-6">
+            <li><a href="/">Trang chủ</a></li>
+
+            <li class='active'>@Model.TenSanPham</li>
+
+        </ol>
+    </div>
+</section>
+<section id="content">
+    <div class="content-wrap">
+        <div class="container clearfix">
+            <div class='collection_banner'>
+
+            </div>
+            <div class="post_content nobottommargin clearfix">
+
+                <div class="sidebar nobottommargin left-sidebar col-sm-3 hidden-xs hidden-sm">
+                    <div class="sidebar-widgets-wrap">
+
+
+                        <div class="widget widget_links clearfix hidden">
+                            <h4>Danh mục</h4>
+                            <ul class='sidebar_menu'>
+
+
+                                <li><a href="../index.html">Trang chủ</a></li>
+
+                                <li><a href="../collections/all.html">Sản phẩm</a></li>
+
+                                <li><a href="../pages/gioi-thieu-ve-leaf-shop.html">Giới thiệu</a></li>
+
+
+                            </ul>
+                        </div>
+
+                        <!-- end categories -->
+                        <!-- recent product -->
+                        <!-- end recent product -->
+                        <!-- most popular -->
+
+                        <div class="widget clearfix">
+
+                            <h4><a href='../collections/cham-soc-da-mat.html'>Sản phẩm nổi bật</a></h4>
+                            <div id="Popular-item" class="sidebar_menu">
+
+                                @foreach (var spNoiBat in @ViewBag.spNoiBat)
+                                {
+                                    <div class="spost clearfix">
+                                        <div class="entry-image">
+                                            <a href="/SanPham/Detail/@spNoiBat.MaSanPham">
+                                                <img src="@spNoiBat.HinhMinhHoa"
+                                                     alt="@spNoiBat.TenSanPham">
+                                            </a>
+                                        </div>
+                                        <div class="entry-c">
+                                            <div class="entry-title">
+                                                <h4>
+                                                    <a href="/SanPham/Detail/@spNoiBat.MaSanPham">
+                                                        @spNoiBat.TenSanPham
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <ul class="entry-meta">
+                                                <li class="color">
+                                                    <ins>@String.Format("{0:0,0đ}", spNoiBat.DonGia)</ins>
+
+                                                </li>
+                                                <!--<li><i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star3"></i> <i class="icon-star-half-full"></i></li>-->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- end most recent -->
+                        <!-- related product -->
+                        <div class="widget clearfix">
+                            <h4><a href='#'>Sản phẩm liên quan</a></h4>
+                            <div id="Popular-item" class="sidebar_menu">
+                                @foreach (var spLienquan in ViewBag.spLienQuan)
+                                {
+                                    <div class="spost clearfix">
+                                        <div class="entry-image">
+                                            <a href="/SanPham/Detail/@spLienquan.MaSanPham">
+                                                <img src="@spLienquan.HinhMinhHoa"
+                                                     alt="@spLienquan.TenSanPham">
+                                            </a>
+                                        </div>
+                                        <div class="entry-c">
+                                            <div class="entry-title">
+
+
+                                                <h4>
+                                                    <a href="/SanPham/Detail/@spLienquan.MaSanPham">
+                                                        @spLienquan.TenSanPham
+                                                    </a>
+                                                </h4>
+
+                                            </div>
+                                            <ul class="entry-meta">
+                                                <li class="color">
+                                                    <ins> @String.Format("{0:0,0đ}", spLienquan.DonGia)</ins>
+
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+
+
+                        <div class="widget clearfix" style='overflow:hidden'>
+                            <div style="width: 100%;">
+                                <!-- Page plugin's width will be 180px -->
+                                <div class="fb-page" data-href="https://www.facebook.com/leafshop.vn/"
+                                     data-width="320"></div>
+                            </div>
+
+                            <script>
+                                (function (d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if (d.getElementById(id)) return;
+                                    js = d.createElement(s); js.id = id;
+                                    js.src = "../../connect.facebook.net/en_US/sdk.js#xfbml=1&appId=263266547210244&version=v2.0";
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                }(document, 'script', 'facebook-jssdk'));
+                            </script>
+                        </div>
+                    </div>
+                </div>
+                <div class='product-page col-md-9'>
+                    <div class="single-product">
+                        <!--<form method="post" id="ProductDetailsForm" action="/???" crossorigin="anonymous">-->
+                        <form method="post" id="ProductDetailsForm" action="#"
+                              crossorigin="anonymous">
+                            <div class="product">
+                                <div class='page_title'>
+                                    <h1>
+                                        @Model.TenSanPham
+                                    </h1>
+                                </div>
+                                <div style='margin-bottom: 25px;'>
+                                    <div class="col-sm-8 pd_img_wrap noleftpadding">
+                                        <!-- Product Single - Gallery
+                                        ============================================= -->
+                                        <div class="product-image product-main-image">
+                                            <div class="slider-wrap">
+
+                                                <div class='pd_slide_thumb slick_thumb col-sm-2 noleftpadding hidden-xs'>
+                                                    <div class="">
+                                                        <div class="img">
+
+                                                            <img src="@Model.HinhMinhHoa" />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="pd_slide col-sm-10 nopadding">
+                                                    <div class="">
+                                                        <div class="img">
+                                                            <img class=""
+                                                                 src="@Model.HinhMinhHoa" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- Product Single - Gallery End -->
+
+                                    </div>
+                                    <div class="col-sm-4 product-desc">
+                                        <div id="hrv-product-reviews" class="hrv-product-reviews"
+                                             data-id="1031532360">
+                                            <div class="title-bl hidden">
+                                                <h2>ĐÁNH GIÁ SẢN PHẨM</h2>
+                                            </div>
+                                            <div id="hrv-product-reviews-sub" style="width:100%">
+                                                <div class="hrv-product-reviews-summary"
+                                                     id="hrv-product-reviews-summary"
+                                                     style="    width: auto;">
+
+                                                </div>
+                                                <div class="hrv-product-reviews-list"
+                                                     id="hrv-product-reviews-list">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Product Single - Price
+                                        ============================================= -->
+
+                                        <div class='col-sm-12 col-md-12 product_info norightpadding'>
+
+                                            <span>
+                                                <strong>Thương hiệu </strong><a href="/SanPham/ThuongHieu/@Model.MaThuongHieu">
+                                                    @Model.ThuongHieu.TenThuongHieu
+                                                </a>
+                                            </span><br>
+
+
+                                            <span><strong>Mã sản phẩm </strong>@Model.MaSanPham</span>
+
+                                        </div>
+
+                                        <div class="product-price col-sm-12 col-md-12 noleftpadding">
+
+                                            <ins> @String.Format("{0:0,0đ}", Model.DonGia)</ins>
+
+
+                                        </div><!-- Product Single - Price End -->
+                                        <!-- Product Single - Rating
+                                        ============================================= -->
+
+                                        <div class="clear"></div>
+
+                                        <div class="line"></div>
+
+                                       
+                                        <!-- variants -->
+                                        <!-- end variant -->
+                                        <!-- <form class="cart nobottommargin clearfix" method="post" enctype='multipart/form-data'>-->
+                                        <div class="quantity product-quantity clearfix col-md-6 col-xs-12 noleftpadding">
+                                            <input type="number" class='qty' id='product_quantity1' step="1" min="1" name="quantity" value="1" title="Qty" max="@Model.SoLuong" />
+                                        </div>
+                                       
+                                        @*<button type="submit" id=''
+                                                    class="add-to-cart button nomargin col-xs-12 col-md-6 nopadding"
+                                                    style="height: 40px !important; width: 50% !important; padding: 0 !Important">
+                                                Thêm
+                                                vào giỏ
+                                            </button>*@
+                                        <div class="nomargin col-xs-12 col-md-6 nopadding"
+                                             style="height: 40px !important; width: 50% !important; padding: 0 !Important">
+                                            @if (Model.SoLuong == 0)
+                                            {
+                                                <div class="buy_alls">
+                                                    <a href="javascript::0">Hết Hàng</a>
+                                                </div>
+                                            }
+                                            @if (Model.SoLuong > 0)
+                                            {
+                                                <div class="buy_all">
+                                                    <a class="product_quick_add" data-toggle='tooltip' href="#" onclick="AddToCart2(@Model.MaSanPham,1)">Thêm </a>
+                                                </div>
+                                            }
+                                        </div>
+
+
+                                        <button type="submit" id=''
+                                                class="button col-xs-12 nopadding buynow">
+                                            Mua ngay
+                                        </button>
+                                        <div class="clear"></div>
+                                        <div class="line"></div>
+
+                                        <div class="si-share noborder clearfix">
+                                            <div class='socical-wrapper'>
+
+
+                                                <ul class="social-icons">
+                                                    <!-- check null: == nill -->
+                                                    <div class="fb-send"
+                                                         data-href="/products/thit-ba-chi-lon-sach-nguyen-khoi-farm-1kg">
+                                                    </div>
+                                                    <div class="item">
+                                                        <div class="fb-like fix_top"
+                                                             data-href="/products/thit-ba-chi-lon-sach-nguyen-khoi-farm-1kg"
+                                                             data-layout="button" data-action="like"
+                                                             data-show-faces="true" data-share="true"
+                                                             style='margin-right: 5px;'></div>
+                                                    </div>
+
+                                                    <!-- old style: <li><a class="facebook" data-original-title="facebook" href="#"></a></li>   ...twitter,googleplus,evernote,tumblr -->
+
+                                                    <script>
+                                                        (function () {
+                                                            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                                                            po.src = '../../apis.google.com/js/plusone.js';
+                                                            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+                                                        })();
+                                                    </script>
+
+                                                </ul>
+                                            </div>
+                                        </div><!-- Product Single - Share End -->
+
+                                    </div>
+
+                                </div>
+                                <div class='clear' style='margin-bottom: 25px;'></div>
+                                <div class="col_full nobottommargin">
+                                    <div class="aetabs-tabs">
+                                        <ul class="tabs clearfix">
+                                            <li class="active"><a href="#tab1">Mô tả</a></li>
+                                            <li class=""><a href="#tab2">Thương hiệu</a></li>
+                                        </ul>
+                                        <div class="tabs-content active" id="tab1">
+                                            @{ 
+                                                HtmlString mt = new HtmlString(Model.MoTa);
+                                            }
+                                            @mt
+                                        </div>
+
+
+                                        <div class="tabs-content " id="tab2">
+                                            <div>
+                                                <span style="font-weight: 400;">
+                                                    <img src="@ViewBag.thuongHieu.AnhThuongHieu"
+                                                         width="189" height="178" />
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <span style="font-weight: 400;">
+                                                    @ViewBag.thuongHieu.MoTaThuongHieu
+                                                </span>
+                                            </div>
+                                            
+                                        </div>
+                                        @*<div class="tabs-content " id="tab3">
+                                            <div id="fb-root">&nbsp;</div>
+                                            <div class="fb-comments">&nbsp;</div>
+                                        </div>*@
+
+                                    </div>
+
+                                    <script>
+                                        var menu = $('.aetabs-tabs .tabs li');
+                                        var menuLinks = $('.aetabs-tabs .tabs li a');
+                                        var tabsContent = $('.aetabs-tabs .tabs-content');
+                                        menuLinks.click(function (e) {
+                                            e.preventDefault();
+                                            var targetBlock = $(this).attr('href');
+                                            menu.removeClass('active');
+                                            $(this).parent('li').addClass('active');
+                                            tabsContent.hide();
+                                            $(targetBlock).fadeIn(500);
+                                        });
+                                    </script>
+
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- related products -->
+                <!-- end related products -->
+
+            </div>
+        </div>
+    </div>
+</section><!-- #content end -->
+<script>
+    $(document).ready(function () {
+        if ($('#product_quantity').val() == '0') {
+            $('.add-to-cart').attr('disabled', 'disabled');
+        }
+        else {
+            $('.add-to-cart').removeAttr('disabled');
+        }
+    });
+
+</script>
+
+<script>
+    var selectCallback = function (variant, selector) {
+        if (variant != null) {
+            var $tagPrice = '#ProductDetailsForm div.product-price ins';
+            var $tagPriceCompare = '#ProductDetailsForm div.product-price del';
+            var $tagProductSection = '#ProductDetailsForm';
+            update_variant(variant, $tagPrice, $tagPriceCompare, '#addtocart', $tagProductSection);
+            if (variant != null && variant.featured_image != null) {
+                $(".pd_slide_thumb .slick-list img[src='" + Haravan.resizeImage(variant.featured_image.src, 'small') + "']").click();
+            };
+        }
+    };
+</script>
+
+<script>
+
+    $(function () {
+        setTimeout(function () {
+            if ($(".widget-last-view .entry-title h4 a").length > 0) {
+                $(".widget-last-view .entry-title h4 a").each(function () {
+                    var path = $(this).attr("href");
+                    var title = $(this).text();
+                    var url = window.location.protocol + "//" + window.location.host + path + "?title=" + title;
+                    $.ajax({
+                        url: url,
+                        success: function (response) {
+                            var desText = $(response).find(".page_title h1").text().trim();
+                            Aecomapp.tranFromSource(".widget-last-view *", title, desText, 1);
+                        }
+                    });
+                });
+            }
+        }, 5000);
+    });
+
+    $(".img-zoom").elevateZoom({
+        zoomWindowWidth: 350,
+        cursor: "crosshair"
+    });
+
+    //$(".slick-slide").click(function () {
+    //    $(".slick-slide .img-zoom").removeAttr("data-zoom-image");
+    //    $.removeData($(".slick-slide .img-zoom"), 'elevateZoom');
+    //    $('.zoomContainer').remove();
+    //    var z = $(".slick-slide[data-slick-index=" + $(this).attr("data-slick-index") + "] .img-zoom");
+    //    z.attr("src", $(this).attr("src")).attr("data-zoom-image", $(this).attr("data-image"));
+    //    z.attr("data-zoom-image", $(this).attr("data-zoom-image"));
+    //    z.elevateZoom({
+    //        zoomWindowWidth: 400,
+    //        cursor: "crosshair"
+    //    });
+    //    $('.zoomWindowContainer div').stop().css("background-image", "url('" + $(this).attr("data-image") + "')");
+    //});
+</script>
+

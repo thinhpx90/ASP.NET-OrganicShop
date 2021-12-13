@@ -1,0 +1,63 @@
+﻿@model LeafShop.Models.Blog
+
+@{
+    ViewBag.Title = "Thông tin bài viết";
+}
+
+<h2>Chi tiết bài viết</h2>
+<style>
+    td,th{
+        padding: 10px;
+    }
+    div a {
+        color: white;
+    }
+
+        div a:hover {
+            color: white;
+        }
+</style>
+<div>
+    <hr />
+    <table style="width:100%" border="1">
+        <tr>
+            <th style="width: 20%;">Tên nhân viên viết bài:</th>
+            <td>@Model.NhanVien.TenNhanVien</td>
+        </tr>
+        <tr>
+            <th>Danh mục bài viết:</th>
+            <td>@Model.DanhMucBlog.TenDanhMucBlog</td>
+        </tr>
+        <tr>
+            <th>Tiêu đề:</th>
+            <td>@Model.TieuDe</td>
+        </tr>
+        <tr>
+            <th>Ảnh:</th>
+            <td>@{ var ImagePath = Model.Anh != null ? Model.Anh : "~/Content/image/h0.png"; }
+                <img src="@Url.Content(ImagePath)" style="width:200px;height: 200px;"/>
+            </td>
+        </tr>
+        <tr>
+            <th>Tóm tắt:</th>
+            <td>@Model.Tomtat</td>
+        </tr>
+        <tr>
+            <th>Ngày khởi tạo:</th>
+            <td>@Model.NgayKhoiTao</td>
+        </tr>
+        <tr>
+            <th>Nội dung:</th>
+            <td>
+                @{
+                    HtmlString nd = new HtmlString(Model.Noidung);
+                        }
+                        @nd
+                    </td>
+        </tr>
+    </table>
+</div>
+<div style="text-align:center;margin-top:10px;">
+    <button class="btn btn-primary">@Html.ActionLink("Cập nhật", "Edit", new { id = Model.MaBaiViet })</button> 
+    <div class="btn btn-warning">@Html.ActionLink("Quay trở lại", "Index")</div>
+</div>

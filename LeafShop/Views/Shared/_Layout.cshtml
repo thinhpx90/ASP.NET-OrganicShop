@@ -1,0 +1,1002 @@
+﻿@{
+
+    LeafShop.Models.KhachHang db = (LeafShop.Models.KhachHang)HttpContext.Current.Session[LeafShop.Session.ConstaintUser.USER_SESSION];
+
+}
+<script src="https://kit.fontawesome.com/e38e0bb8bb.js" crossorigin="anonymous"></script>
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <link rel="shortcut icon" href="~/Content/image/favicon9a76.png?v=3659" type="image/png" />
+    <!-- <meta charset="utf-8" /> -->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-language" content="vi">
+    <title>
+        Leaf Organic - Natural & Organic Care
+    </title>
+    <script src="https://kit.fontawesome.com/e38e0bb8bb.js" crossorigin="anonymous"></script>
+    <meta name="keywords" content="Leaf Organic - Natural & Organic Care, Theme, Egany, Haravan">
+    <meta name="robots" content="noodp,index,follow">
+    <meta name="revisit-after" content="1 days">
+    <meta name="language" content="vietnamese">
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=0' name='viewport' />
+    <meta name="theme-color" content="#79b100">
+    <meta name="msapplication-TileColor" content="#79b100">
+    <!-- shop-asset -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Lato+Sans+Narrow|Source+Sans+Pro:200,300,400,600,700,900&amp;subset=all" rel="stylesheet" type="text/css">
+    <!-- Fonts END -->
+    <link href='~/Content/css/bootstrap.min.css' rel='stylesheet' type='text/css' media='all' />
+    <link href='~/Content/css/jquery.fancybox.css' rel='stylesheet' type='text/css' media='all' />
+    <link href='~/Content/css/font-awesome.min.css' rel='stylesheet' type='text/css' media='all' />
+    <link href='~/Content/css/hp_genner9a76.css?v=3659' rel='stylesheet' type='text/css' media='all' />
+    <link href='~/Content/css/style9a76.css?v=3659' rel='stylesheet' type='text/css' media='all' />
+    <link href='~/Content/css/dark9a76.css?v=3659' rel='stylesheet' type='text/css' media='all' />
+    <link href='~/Content/css/animate9a76.css?v=3659' rel='stylesheet' type='text/css' media='all' />
+    <link href='~/Content/css/responsive9a76.css?v=3659' rel='stylesheet' type='text/css' media='all' />
+    <link href='~/Content/css/jgrowl9a76.css?v=3659' rel='stylesheet' type='text/css' media='all' />
+    <link href='~/Content/css/slick.scss9a76.css?v=3659' rel='stylesheet' type='text/css' media='all' />
+    <!-- Egany custom style -->
+    <link href='~/Content/css/custom_style9a76.css' rel='stylesheet' type='text/css' media='all' />
+    <link href='~/Content/css/green-pos9a76.css?v=3659' rel='stylesheet' type='text/css' media='all' />
+    <script src='~/Content/js/jquery-2.1.4.min.js' type='text/javascript'></script>
+
+    <script src='~/Content/js/slider_enf9a76.js?v=3659' type='text/javascript'></script>
+    <script src='~/Content/js/jquery.elevateZoom-3.0.8.min9a76.js?v=3659' type='text/javascript'></script>
+    <style>
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+    </style>
+    <link href='~/Content/css/ae-multilang-custom9a76.css?v=3659' rel='stylesheet' type='text/css' media='all' />
+    <style id="ae-switch-lang-css">
+        .ae-lang-vi {
+            display: inline !important;
+        }
+    </style>
+    <style id="ae-position-lang-css">
+        .ae-hover {
+            box-shadow: 0 0 5px #bbb
+        }
+    </style>
+</head>
+
+<body class="stretched no-transition body_collection">
+    
+    <style>
+        #social-fixed {
+            position: fixed;
+            bottom: 120px;
+            width: 50px;
+            right: 28px;
+            z-index: 99999;
+        }
+
+            #social-fixed #suntory-alo-phoneIcon {
+                display: block;
+                position: relative;
+            }
+
+            #social-fixed > a {
+                display: block;
+                position: relative;
+                height: 50px;
+                margin-top: 20px;
+            }
+    </style>
+
+    <div id="bottom-left" class="hidden-xs">
+        <a href="http://leafshop.vn/pages/phuong-thuc-van-chuyen">
+            <div class="text">
+                <i style="font-size:20px;" class="fa fa-caret-right" aria-hidden="true"></i> Chính sách vận chuyển
+            </div>
+        </a>
+    </div>
+    <style>
+        @@media (max-width: 991px) {
+            #menu-toggle {
+                top: 8px;
+                margin-left: 285px;
+                border: none;
+                font-size: 20px;
+                width: 45px;
+                height: 30px;
+                line-height: 30px;
+                font-size: 30px;
+                padding: 0;
+                text-align: center;
+                border-radius: 0;
+            }
+
+                #menu-toggle span {
+                    line-height: 1;
+                    display: block;
+                    font-size: 16px;
+                }
+
+            #menu_xs,
+            #menu-toggle {
+                position: fixed;
+                z-index: 300;
+                left: -275px;
+                transition: left 0.4s ease;
+            }
+
+            #menu_xs {
+                width: 275px;
+                height: 100%;
+                background: #fff;
+            }
+
+            .sidebar-nav {
+                width: 100%;
+                margin: 0;
+                overflow-y: scroll;
+                height: 100%;
+            }
+
+                .sidebar-nav li {
+                    padding: 10px 0 10px 10px;
+                    font-size: 1em;
+                    border-bottom: 1px solid #f4f4f4;
+                }
+
+                    .sidebar-nav li a {
+                        color: #555;
+                    }
+
+                    .sidebar-nav li.current > a {
+                        color: #79b100;
+                    }
+
+            #menu_xs ul a span {
+                float: right;
+                text-align: right;
+                padding-right: 15px;
+                font-size: 1.1em;
+                width: 25%;
+            }
+
+            #menu_xs ul.sidebar-nav li ul {
+                display: none;
+                list-style: none;
+            }
+
+            #top-search-sm form {
+                width: 100%;
+                padding: 10px 10px 5px 0;
+                margin-bottom: 15px;
+            }
+
+            #top-search-sm .form-control {
+                width: 100%;
+                height: 40px;
+            }
+
+            .body_overlay {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.6);
+                z-index: 299;
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0.4s ease, opacity 0.4s ease;
+            }
+
+                .body_overlay.toggled {
+                    visibility: visible;
+                    opacity: 1;
+                }
+
+            #menu-toggle.toggled,
+            #menu_xs.toggled {
+                left: 0;
+            }
+
+            #wrapper {
+                transition: all 0.4s;
+            }
+
+                #wrapper.toggled {
+                    margin-left: 275px;
+                }
+        }
+
+        @@media (max-width: 767px) {
+            #menu-toggle {
+                left: -275px;
+                top: 5px;
+                width: 30px;
+                height: 30px;
+                line-height: 30px;
+                font-size: 22px;
+            }
+
+                #menu-toggle span {
+                    font-size: 11px;
+                }
+        }
+    </style>
+
+    <div class='body_overlay'></div>
+    <a href="#menu-toggle" class="btn btn-default hidden-lg hidden-md" id="menu-toggle">
+        <i class='fa fa-bars'></i>
+        <span>MENU</span>
+    </a>
+
+
+    <script>
+        //responsive menu
+        $("#menu-toggle, .body_overlay").click(function (e) {
+            e.preventDefault();
+            var $show_menu = $('#menu_xs, #menu-toggle, .body_overlay');
+            $show_menu.toggleClass("toggled");
+        });
+        $('#menu_xs ul a span').click(function (e) {
+            e.preventDefault();
+            $(this).parent().next().toggle(200);
+            if ($(this).text() == '+')
+                $(this).text('-');
+            else
+                $(this).text('+');
+        })
+        //end responsive menu</script>
+    <!-- Document Wrapper
+    ============================================= -->
+    <div id="wrapper" class="clearfix">
+        <!-- style="animation-duration: 1.5s; opacity: 1;"-->
+
+
+        <script>
+            /*** left menu ***/
+            $(window).load(function () {
+                if ($(window).width() > 991) {
+                    $(this).scroll(function () {
+                        var height = $(window).scrollTop();
+                        if (height >= 200) {
+                            $('.left_menu').addClass('left_menu_sticker');
+                            $('.left_menu #collapse1').addClass('in');
+                            $('.left_menu .submenu').addClass('hidden');
+                        }
+                        else {
+                            $('.left_menu').removeClass('left_menu_sticker');
+                            $('.left_menu #collapse1').removeClass('in');
+                            $('.left_menu .submenu').removeClass('hidden');
+                        }
+                    });
+                }
+            });
+            /*** end left menu ***/</script>
+
+        <!-- Top Bar
+        ============================================= -->
+
+        <div class="zom_grr">
+            <div id="top-bar" class="">
+                <div class="container clearfix">
+
+                    <div class="col_half col_last fright nobottommargin top_link_wrapper">
+                        <div class="top-links">
+                            <ul>
+
+                                @if (db != null)
+                                {
+                                    <li><a href="/LeafShop/Index">Về LeafShop</a></li>
+                                    <li><a href="@Url.Action("Index", "Blog")">Blog</a></li>
+                                    <li><a href="/UsersInformation/UsersInf/@db.MaKhachHang">Xin chào, @db.TenKhachHang</a></li>
+
+                                    <li><a href="@Url.Action("Logout", "Home")">Thoát</a></li>
+                                }
+
+                                @if (db == null)
+                                {
+                            <li><a href="/LeafShop/Index">Về LeafShop</a></li>
+                                    <li><a href="@Url.Action("Index", "Blog")">Blog</a></li>
+                                    <li><a href='@Url.Action("Login", "Home")'>Đăng nhập / Đăng ký</a></li>
+                                }
+
+                                <li></li>
+                            </ul>
+                        </div><!-- .top-links end -->
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- #top-bar end -->
+        <!-- Header
+        ============================================= -->
+        <div class="zom_grr">
+            <header id="header">
+                <div id="header-wrap">
+                    <div class="container clearfix">
+                        <!-- Logo
+                        ============================================= -->
+                        <div id="logo" class='col-md-3 col-xs-6 col-xs-push-3 col-sm-push-0 nopadding'>
+                            <a href="~/Home/Index" class="standard-logo" data-dark-logo=" ~/Content/image/logo.png?v=3659"><img src=" ~/Content/image/logo9a76.png?v=3659" alt="Thực phẩm tươi sống/ chế biến"></a>
+                            <a href="~/Home/Index" class="retina-logo" data-dark-logo=" ~/Content/image/logo.png?v=3659"><img src="~/Content/image/logo9a76.png?v=3659" alt="Thực phẩm tươi sống/ chế biến"></a>
+                        </div><!-- #logo end -->
+                        <!-- Top Search
+                        ============================================= -->
+                        <!-- Top Search
+                        ============================================= -->
+                        <div class='top_search col-md-9 col-xs-12'>
+
+
+                            <form action="/SanPham/Index" class="searchform-categoris ultimate-search col-sm-8 form-inline nopadding nomargin">
+
+                                <div class="wpo-search">
+
+                                    <div class="wpo-search-inner">
+
+                                        <div class="input-group" style="margin: 2px 0px 5px; width: 100%">
+
+
+                                            <input id="searchtext" name="searchString" maxlength="40" class="form-control input-search" type="text" size="20" placeholder="Tìm kiếm..." style="width: 500px;">
+
+                                            <span class="input-group-auto">
+
+                                                <button type="submit" id="searchsubmit" class="fa" value=""><i class="fa fa-search" aria-hidden="true"></i></button>
+
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </form>
+
+
+                            <style>
+
+                                .smart-search-wrapper > a.thumbs {
+                                    width: 64px;
+                                    display: inline-block;
+                                    height: 64px;
+                                    padding: 5px 0px;
+                                    clear: both;
+                                }
+
+                                #searchtext {
+                                    width: 100%;
+                                    -webkit-transition: width 0.5s ease 0s;
+                                    transition: width 0.5s ease 0s;
+                                    height: 40px;
+                                    border-radius: 5px;
+                                    color: #000;
+                                    border: 1px solid #d3d3d3;
+                                    font: normal 13px 'Arial';
+                                    background: transparent;
+                                    border-radius: 0px;
+                                }
+
+                                .input-group-auto {
+                                    height: 35px;
+                                    color: #000;
+                                    position: absolute;
+                                    right: 0;
+                                    top: 0;
+                                    background: none;
+                                    border: none;
+                                    z-index: 99;
+                                }
+
+                                    .input-group-auto #searchsubmit {
+                                        background: none;
+                                        border: 0;
+                                        width: 46px;
+                                        height: 40px;
+                                        font-size: 18px;
+                                        background-color: #F2963C;
+                                    }
+
+                                        .input-group-auto #searchsubmit i {
+                                            color: #fff;
+                                        }
+
+                                .smart-search-wrapper > a.thumbs img {
+                                    position: absolute;
+                                    top: 0px;
+                                    width: 64px;
+                                    height: 64px;
+                                    left: 0px;
+                                }
+
+                                .smart-search-wrapper {
+                                    position: fixed;
+                                    background: #fff;
+                                    border: 1px solid rgb(215, 215, 215);
+                                    border-top: none;
+                                    z-index: 999;
+                                    max-height: 300px;
+                                    overflow: auto;
+                                }
+
+                                    .smart-search-wrapper > a {
+                                        width: calc(100% - 64px);
+                                        float: left;
+                                        text-overflow: ellipsis;
+                                        overflow: hidden;
+                                        white-space: pre;
+                                        color: #686767;
+                                        text-decoration: none;
+                                        line-height: 29px;
+                                        font-size: 13px;
+                                        font-family: sans-serif;
+                                        padding: 5px 80px 5px 5px;
+                                        position: relative;
+                                    }
+
+                                        .smart-search-wrapper > a.select, .smart-search-wrapper > a:hover {
+                                            background: -webkit-linear-gradient(left, #fff,#EAEAEA); /* For Safari 5.1 to 6.0 */
+                                            background: -o-linear-gradient(left, #fff,#EAEAEA); /* For Opera 11.1 to 12.0 */
+                                            background: -moz-linear-gradient(left, #fff,#EAEAEA ); /* For Firefox 3.6 to 15 */
+                                            background: linear-gradient(left, #fff,#EAEAEA ); /* Standard syntax (must be last) */
+                                            color: #000;
+                                        }
+
+                                        .smart-search-wrapper > a > span.price-search {
+                                            position: absolute;
+                                            right: 5px;
+                                            top: 0px;
+                                        }
+
+                                .smart-search-wrapper {
+                                    /*max-height: 300px;
+                                overflow-y: scroll;*/
+                                }
+
+                                .title-search {
+                                    font-weight: bold;
+                                }
+
+                                .desc-search {
+                                    margin: 0px;
+                                    white-space: normal;
+                                }
+
+                                .price-search {
+                                    font-weight: bold;
+                                }
+                            </style>
+
+
+                            <div id="top-cart" class='top-cart-block col-md-1 nopadding'>
+                                <a href="#" id="top-cart-trigger">
+                                    <img src='~/Content/image/cart-x9a76.png?v=3659'><span class='top_cart_qty'>0</span>
+                                </a>
+                                <div class="top-cart-content" style="width:300px;">
+                                    <div class="top-cart-title">
+                                        <h4>Giỏ hàng</h4>
+                                    </div>
+                                    <div class="top-cart-items">
+
+                                    </div>
+                                    <div class="top-cart-action clearfix">
+                                        <span class="fleft top-checkout-price">0₫</span>
+                                        <input type="hidden" class="top_cart_total_price_not_format" value="0" />
+                                        <a href="/Cart/Orders" class="button button-small nomargin fright">Xem giỏ hàng</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <a class='top_hotline col-sm-3 hidden-sm hidden-xs nopadding' href='tel:0975380816'><img src='~/Content/image/top_hotline9a76.png?v=3659' /></a>
+
+                        </div>
+                        <!-- #top-search end -->
+                        <!-- top link trigger --->
+                        <a href='#' id='top_link_trigger' class='hidden-lg hidden-md'><i class='fa fa-ellipsis-v'></i></a>
+                        <!-- end top link trigger --->
+                        <script>
+                            $("#sidebar-wrapper ul li a span").click(function (event) {
+                                event.preventDefault();
+                                var li = $(this).parents('li');
+                                li.children('ul').toggle('slow');
+                            });</script>
+                        <!-- #primary-menu end -->
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div id="menu_xs" class=''>
+            <!-- Sidebar -->
+            @*@{ Html.RenderAction("CategoryTree", "Home");}*@
+            <!-- /#page-content-wrapper -->
+        </div>
+        <!-- #header end -->
+        <div class="zom_grr">
+            <div class='container slide_wrapper'>
+                <!-- left menu -->
+                <!-- end left menu -->
+                <div class='slider_wrap'>
+                    <div id="conteneur">
+                        <div class="header">
+                            <div class="menu_nav">
+                                <div id="onglet_gauche" class="gauche">
+                                </div>
+                                @{ Html.RenderAction("CategoryTree", "Home");}
+                                <div id="onglet_droit" class="droit"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <style>
+                        .line-text {
+                            line-height: 23px !important;
+                        }
+                    </style>
+
+
+                    <!-- Slider -->
+                    <!-- end slider -->
+
+
+                </div>
+                <div class='clear'></div>
+            </div>
+        </div>
+        <!-- Content
+        ============================================= -->
+        @RenderBody()
+
+        <!-- #content end -->
+        <!-- Footer
+        ============================================= -->
+        <div class="zom_grr">
+            <div class="spriteHerbe container">&nbsp;</div>
+            <footer id="footer" class='dark' style="margin-top:0px;">
+                <div class="container">
+
+                    <!-- Footer Widgets
+                    ============================================= -->
+                    <div class="footer-widgets-wrap clearfix footer_wrap_2">
+                        <div class="prefooter_one col-sm-3 col-xs-12">
+
+                            <div class="widget clearfix">
+
+                                <h4>Cửa hàng</h4>
+                                <div class="info_more">
+                                    <p class="diachi_hot" style="padding-left: 15px;">
+                                        <strong style="color:#555">Tên công ty</strong>: Công Ty TNHH Leaf Organic Việt Nam<br />Số 2 ngõ 70/58 đường Văn Trì, P. Minh Khai, Q.Bắc Từ Liêm, Hà Nội, Việt Nam<br />
+
+                                        <strong style="color:#555">MST:</strong> 0107693727<br />
+
+                                        <strong style="color:#555">Hà nội: </strong>Số 29 Nguyễn Chí Thanh, Quận Ba Đình,Hà Nội
+                                    </p>
+                                    <p class="diachi_hot" style="padding-left: 15px;">
+                                        <strong style="color:#555">HCM: </strong>7B/8-Nguyễn Thị Minh Khai, P.Bến Nghé, Quận 1, HCM
+                                    </p>
+
+
+                                    <div class="hotline-ss">
+                                        <strong style="color:#555" class="local_io">Hotline: </strong>
+                                        <span>Hà Nội: 0975.380.816</span><br>
+                                        <span style="padding-left: 63.5px;">Hồ Chí Minh: 0901.469.786</span>
+                                    </div>
+                                </div>
+
+                                <div class="email-xl">
+                                    <strong style="color:#555" class="local_io">Email: </strong>
+                                    <span>contact@leafshop.vn</span>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="prefooter_one col-sm-3 col-xs-12">
+
+                            <div class="widget widget_links clearfix">
+
+                                <h4>Về chúng tôi</h4>
+
+                                <ul>
+                                    <li><a href="/LeafShop/Index">Giới thiệu về Leaf Organic</a></li>
+                                    <li><a href="/Blog/Index">Blog</a></li>
+                                    <li><a href="/LeafShop/DieuKhoanSuDung">Điều khoản sử dụng</a></li>
+                                </ul>
+
+                            </div>
+                            <div class='marginbottom hidden-lg hidden-md hidden-sm'>
+
+                            </div>
+                        </div>
+
+                        <div class="prefooter_one col-sm-3 col-xs-12">
+
+                            <div class="widget widget_links clearfix">
+
+                                <h4>Tài khoản của bạn</h4>
+
+                                <ul>
+
+                                    <li><a href="@Url.Action("Orders","Cart")">Giỏ hàng</a></li>
+
+                                    <li><a href="/Home/Login">Đăng nhập - Đăng ký</a></li>
+
+
+                                </ul>
+
+                            </div>
+
+                            <div class="widget widget_links clearfix" style="margin-top:10px;">
+
+                                <h4>Hỗ trợ khách hàng</h4>
+                                <ul>
+                                    <li><a href="/LeafShop/ThanhToan">Thanh toán</a></li>
+                                    <li><a href="/LeafShop/ChinhSach">Chính sách đổi trả</a></li>
+
+
+                                </ul>
+                            </div>
+                            <div class='marginbottom hidden-lg hidden-md hidden-sm'>
+
+                            </div>
+                        </div>
+
+
+                        <div class="prefooter_one col-sm-3 col-xs-12">
+                            <div class="widget widget_links clearfix">
+                             
+
+                                <h4>Kết nối với chúng tôi</h4>
+                                <div class="social-link">
+
+                                    <a target="_blank" href="https://www.facebook.com/leafshop.vn/"><i class="fa fa-facebook icon-facebook"></i></a>
+
+
+                                    <a target="_blank" href="http://www.youtube.com/channel/UC_6LnRIenOoPq1TvsTviGJQ"><i class="fa fa-youtube icon-youtube"></i></a>
+
+
+                                    <a target="_blank" href="http://www.instagram.com/leafshop.vn/"><i class="fa fa-instagram icon-instagram"></i></a>
+
+                                </div>
+                                <br>
+
+                                <div class="logo-footer">
+                                    <a href="http://online.gov.vn/CustomWebsiteDisplay.aspx?DocId=53001" target="_blank">
+                                        <img src="~/Content/image/logo-bct9a76.png?v=3659" alt="Bộ Công Thương">
+                                    </a>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div><!-- .footer-widgets-wrap end -->
+
+                    <p class="copyright">
+                        Copyright 2021 Leaf Organic. Web này thật là nhiều js
+                    </p>
+                </div>
+
+
+
+            </footer>
+        </div>
+        <!-- #footer end -->
+
+    </div><!-- #wrapper end -->
+    <!-- Go To Top
+    ============================================= -->
+    <div id="gotoTop" class="fa fa-angle-up"></div>
+
+
+    <!-- quick add cart -->
+    <div id='product-pop-up' style="display:none;" class="single-product shop-quick-view-ajax clearfix">
+        <div class="ajax-modal-title">
+            <a href='#'><h2 id="tensp"> </h2></a>
+        </div>
+
+        <div class="product-page product modal-padding clearfix">
+            <div class="col-md-6 nobottommargin">
+                <div class="product-image">
+                    <div class="product-main-image">
+                        <div class="pd_slide_qv">
+                            <img id="anhmh" data-lazy="#">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 nobottommargin product-desc">
+                <div class="product-price" id="giasp">Đơn giá</div>
+                <div class="clear"></div>
+                <div class="line"></div>
+
+                <!-- Product Single - Quantity & Cart Button
+                ============================================= -->
+                <div id='ProductDetailsFormQV' class="nobottommargin clearfix">
+                    <div class="quantity product-quantity clearfix col-xs-6 noleftpadding">
+                        <input type="number" class='qty' id='product_quantity1' step="1" min="1" name="quantity" value="1" title="Qty" size="3" />
+                    </div>
+                    <script></script>
+                    <div class="hidden" style="">
+                        <select id="product-select-qw" name="id">
+                        </select>
+
+                        <input type="hidden" class="unit_price_not_formated" value="">
+                        <input type="hidden" class="product_url" value="">
+                        <input type="hidden" class="product_title_hd" value="">
+                        <input type="hidden" class="product_img_small" value="">
+                    </div>
+                    <button type="button" id='addtocartQV' class="addtocartQV button nomargin col-xs-6">Add to cart</button>
+                    <button class='buy_btn buynow buynow_qv button col-xs-12 noleftmargin norightmargin' id='buynow'>Mua ngay</button>
+                </div><!-- Product Single - Quantity & Cart Button End -->
+
+                <div class="clear"></div>
+                <div class="line"></div>
+                <p class="description" id="motasp">Mô tả</p>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        
+        /*
+           *  strip_html_js
+           *
+           * ref: http://stackoverflow.com/questions/822452/strip-html-from-text-javascript
+           * author phong.nguyen 20150806
+           */
+        function strip_html_js(html) {
+            var tmp = document.createElement("DIV");
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || "";
+        }
+
+        var quickViewProduct = function (purl) {
+
+            // if ($(window).width() < 680) { window.location = purl; return false; }
+            // modal = $('#quick-view-modal'); modal.modal('show');
+
+            //$('.modal-backdrop').css('opacity', '0');
+            return false;
+        }
+
+        jQuery(document).ready(function () {
+            ega.init();
+        })
+
+    </script>
+
+    <div id="product-quick-add" style="display: none; width: 700px;">
+        <div class="product-page ">
+            <div class="row">
+                <form id="ProductDetailsForm_QuickAdd">
+
+                    <div class="hidden" style="">
+                        <select id="product-select-qa" name="id">
+                        </select>
+
+                        <input type="hidden" class="unit_price_not_formated"><!-- </input> -->
+                        <input type="hidden" class="product_url" value=""> <!--</input>-->
+                        <input type="hidden" class="product_title_hd" value=""> <!--</input>-->
+                        <input type="hidden" class="product_img_small" value=""> <!--</input>-->
+                    </div>
+
+                    <input id="product-quantity" name="quantity" type="text" value="1" readonly class="form-control input-sm quantity">
+
+                    <button id="addtocartQA" class="btn btn-primary" type="submit">Thêm vào giỏ</button>
+                </form>
+            </div>  <!-- END: row -->
+        </div>
+    </div>
+
+    <script>
+        var currentIMG = '';
+        $(document).on('click', '.product_quick_add', function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            // quick add
+            currentIMG = $(this).parents('.product').find('.product-image img');
+            quickAddProduct($(this).attr('href')); // make-up "#product-quick-add";
+        });
+
+
+        jQuery(document).ready(function ($) {
+            //add to cart for QuickView
+            $("#addtocartQA").on('click', function (e) {  //.click(function(e){ //
+                e.preventDefault();
+                addItem('ProductDetailsForm_QuickAdd');
+            });
+        });
+        /*** end quick add cart ***/</script>
+    <!-- end quick add cart -->
+
+
+    <script src='~/Content/js/bootstrap.min.js' type='text/javascript'></script>
+    <script src='~/Content/js/plugins.min9a76.js?v=3659' type='text/javascript'></script>
+    <!-- Haravan plugins BEGIN -->
+    <script src='~/Content/js/option_selection.js' type='text/javascript'></script>
+    <script src='~/Content/js/api.jquery.js' type='text/javascript'></script>
+    <!-- Haravan plugins END -->
+    <script src='~/Content/js/slick.min9a76.js?v=3659' type='text/javascript'></script>
+    <script src='~/Content/js/jgrowl9a76.js?v=3659' type='text/javascript'></script>
+    <!-- script.js -->
+    <script src='~/Content/js/script9a76.js?v=3659' type='text/javascript'></script>
+    <script src='~/Content/js/jquery.fancybox.pack9a76.js?v=3659' type='text/javascript'></script>
+    <script src='~/Content/js/functions9a76.js?v=3659' type='text/javascript'></script>
+    <script src='~/Content/js/additional_scripts9a76.js?v=3659' type='text/javascript'></script>
+
+    <style>
+        .content-wrap, #wrapper {
+            background: #ffffff url(../../Content/image/BG-fruit9a76.jpg) no-repeat fixed center top !important;
+        }
+
+            .content-wrap > .container, .slide_wrapper, #page-title .container {
+                background-color: #fff !important
+            }
+
+        .product_info a, .pd_policies a {
+            color: #FE8D2D !important;
+        }
+    </style>
+
+    <script>
+        function getCart() {
+            $(".top-cart-content").empty();
+            $.ajax({
+                type: "POST",
+                contentType: 'application/json',
+                url: "/Cart/getCart",
+                success: function (response) {
+                    if (response.length == 0) {
+                        $(".top-cart-content").append('<div class="top-cart-items">Không có sản phẩm nào trong giỏ hàng</div>');
+                        return;
+                    }
+                    $(".top-cart-content").append('<div class="top-cart-items"></div>');
+                    let total = 0;
+                    $.each(response, function (index) {
+                        total += response[index].SoLuong;
+                        $(".top-cart-items").append('<div class="top-cart-item clearfix">'
+                            + '<input type="hidden" class="item_id" value="1008322895">'
+                            + '<input type="hidden" class="item_qty" value="' + response[index].SoLuong + ' ">'
+                            + '<input type="hidden" class="item_unit_price_not_formated" value="' + response[index].DonGia + '">'
+                            + ' <div class="top-cart-item-image">'
+
+                            + ' <a href="#"><img src="' + response[index].SanPham.HinhMinhHoa + '" alt=""></a>'
+                            + '</div>'
+                            + '     <div class="top-cart-item-desc">'
+                            + '  <a href="/products/tinh-dau-tea-tree-huu-co-gravier-10ml">' + response[index].SanPham.TenSanPham + '</a>'
+                            + '    <span class="top-cart-item-price">' + new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(response[index].DonGia) + '</span>'
+                            + '    <span class="top-cart-item-quantity">x ' + response[index].SoLuong + '</span>'
+                            + '    <a class="top_cart_item_remove" onclick="deleteFromCart(' + response[index].SanPham.MaSanPham + ');"> '
+                            + '<i class="fa fa-times-circle"></i>'
+                            + '  </a ></div ></div >'
+                        )
+                    })
+                    $(".top_cart_qty").html(total);
+                    $(".top-cart-content").append('<div class="top-cart-action clearfix">'
+                        + ' <button onclick="redirect()" class="button button-small nomargin fright">Xem giỏ hàng</button>'
+                        + ' </div >')
+                },
+                error: function (response) {
+
+                }
+            });
+        }
+        function redirect() {
+            window.location.href = "/Cart/Orders";
+        }
+
+        function loadsp(id) {
+            $.ajax({
+                type: "POST",
+                data: { masp: id },
+                url: "/SanPham/getProductDetail",
+                success: function (response) {
+                    $("#tensp").html(response.TenSanPham);
+                    $("#anhmh").attr("src", response.HinhMinhHoa);
+                    $("#giasp").html(new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(response.DonGia));
+                    $("#product_quantity").val(1);
+                    if (response.SoLuong > 0) {
+                        $("#addtocartQV").html("Thêm vào giỏ");
+                        $("#addtocartQV").removeAttr("disabled");
+                        $("#buynow").html("MUA NGAY");
+                        $("#buynow").removeAttr("disabled");
+                    } else {
+                        $("#addtocartQV").html("Hết hàng");
+                        $("#addtocartQV").attr("disabled", "disabled");
+                        $("#buynow").html("SOLD OUT");
+                        $("#buynow").attr("disabled", "disabled");
+                    }
+                    $("#motasp").html(response.MoTa);
+                    $("#addtocartQV").attr("onclick", "AddToCart2(" + response.MaSanPham + ")");
+                    $("#buynow").attr("onclick", "AddToCheckOut(" + response.MaSanPham + ")");
+                    $("#product_quantity1").attr("max", response.SoLuong);
+                },
+                error: function (response) {
+
+                }
+            });
+        }
+
+        function AddToCart2(id) {
+            var soluong = $("#product_quantity1").val();
+            AddToCart(id, soluong);
+            $(".fancybox-close").click();
+        }
+
+        function AddToCart(id, soluong) {
+            $.ajax({
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify({ "MaSanPham": id, "SoLuong": soluong }),
+                url: "/Cart/AddToCart",
+                success: function (response) {
+                    if (response.status) {
+                        getCart();
+                    }
+                },
+                error: function (response) {
+
+                },
+
+            });
+        }
+
+        function AddToCheckOut(id) {
+            var soluong = $("#product_quantity1").val(); 
+            $.ajax({
+                type: "POST",
+                contentType: 'application/json',
+                data: JSON.stringify({ "MaSanPham": id, "SoLuong": soluong }),
+                url: "/Cart/AddToCart",
+                success: function (response) {
+                    if (response.status) {
+                        getCart();
+                        window.location.href = "/Cart/CheckOut";
+
+                    }
+                },
+                error: function (response) {
+
+                },
+
+            });
+        }
+
+
+        function deleteFromCart(id) {
+            $.ajax({
+                type: "POST",
+                data: { id: id },
+                url: "/Cart/DeleteFromCart",
+                success: function (response) {
+                    if (response.status) {
+                        getCart();
+                    }
+                },
+                error: function (response) {
+
+                },
+
+            });
+        }
+
+        jQuery(document).ready(function () {
+            getCart();
+        });
+    </script>
+
+    <script src="~/Content/js/OneSignalSDK.js" async=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function () {
+            OneSignal.init({
+                appId: "4337ebf8-0b69-4e0c-abad-b59d1a265d44",
+            });
+        });</script>
+</body>
+
+<!-- Mirrored from leaforganic.vn/collections/thuc-pham-tuoi-song-che-bien by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Aug 2021 09:22:23 GMT -->
+</html>

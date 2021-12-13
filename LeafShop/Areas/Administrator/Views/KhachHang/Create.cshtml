@@ -1,0 +1,104 @@
+﻿@model LeafShop.Models.KhachHang
+
+@{
+    ViewBag.Title = "Thêm mới khách hàng";
+}
+<style>
+    div a {
+        color: white;
+    }
+
+        div a:hover {
+            color: white;
+        }
+</style>
+<h2 style="font-size: 30px">Thêm mới khách hàng</h2>
+<hr />
+@using (Html.BeginForm("Create", "KhachHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="pt-4 pb-3">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Tên khách hàng</label>
+                        @Html.EditorFor(model => model.TenKhachHang, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenKhachHang, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Địa chỉ</label>
+                        @Html.EditorFor(model => model.DiaChiKhachHang, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DiaChiKhachHang, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Điện thoại</label>
+                        @Html.EditorFor(model => model.DienThoaiKhachHang, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DienThoaiKhachHang, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Tên đăng nhập</label>
+                        @Html.EditorFor(model => model.TenDangNhap, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenDangNhap, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Mật khẩu</label>
+                        @Html.EditorFor(model => model.MatKhau, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MatKhau, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Ngày sinh</label>
+                        @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <br />
+                        <label for="form15">Giới tính</label>
+                        <div class="form-group row">
+                            @Html.RadioButtonFor(model => model.GioiTinh, true)
+                            <span>Nam</span>
+
+                            @Html.RadioButtonFor(model => model.GioiTinh, false)
+                            <span>Nữ</span>
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Email</label>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <br />
+                        <label for="form15">Trạng thái</label>
+                        <div class="form-group row">
+                            @Html.RadioButtonFor(model => model.TrangThai, true)
+                            <span>Đang hoạt động</span>
+
+                            @Html.RadioButtonFor(model => model.TrangThai, false)
+                            <span>Không hoạt động</span>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                        <div class="btn btn-warning">@Html.ActionLink("Quay trở lại", "Index")</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@if (ViewBag.Error != null)
+{
+    <br />
+    <div class="alert alert-danger col-lg-2" role="alert">@ViewBag.Error</div>
+}

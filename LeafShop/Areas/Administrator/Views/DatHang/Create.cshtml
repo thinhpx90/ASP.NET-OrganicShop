@@ -1,0 +1,81 @@
+﻿@model LeafShop.Models.DatHang
+
+@{
+    ViewBag.Title = "Thêm mới đặt hàng";
+}
+<style>
+    div a {
+        color: white;
+    }
+
+        div a:hover {
+            color: white;
+        }
+</style>
+<h2 style="font-size: 30px">Thêm mới đặt hàng</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="pt-4 pb-3">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="md-form md-outline my-0">
+                        <label for="form13">Tên khách hàng </label>
+                        <div class="select-outline position-relative w-100">
+                            @Html.DropDownList("MaKhachHang", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MaKhachHang, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="md-form md-outline my-0">
+                        <label for="form13">Tên nhân viên </label>
+                        <div class="select-outline position-relative w-100">
+                            @Html.DropDownList("MaNhanVien", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MaNhanVien, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Tổng tiền</label>
+                        @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
+                    </div>
+                    
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Ghi chú</label>
+                        @Html.EditorFor(model => model.GhiChu, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GhiChu, "", new { @class = "datepicker" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Địa chỉ nhận hàng</label>
+                        @Html.EditorFor(model => model.DiaChi, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DiaChi, "", new { @class = "datepicker" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Trạng thái</label>
+                        <div class="form-group row">
+                            @Html.RadioButtonFor(model => model.TrangThai, true)
+                            <span>Chưa hoàn thành</span>
+
+                            @Html.RadioButtonFor(model => model.TrangThai, false)
+                            <span>Hoàn thành</span>
+                        </div>
+
+                    </div>
+                    <div class="md-form md-outline mt-0">
+                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                        <div class="btn btn-warning"> @Html.ActionLink("Quay trở lại", "Index")</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+

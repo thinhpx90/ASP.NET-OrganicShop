@@ -1,0 +1,109 @@
+﻿@model LeafShop.Models.SanPham
+
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+}
+
+<h2>Chi tiết sản phẩm</h2>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DanhMuc.TenDanhMuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DanhMuc.TenDanhMuc)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ThuongHieu.TenThuongHieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ThuongHieu.TenThuongHieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSanPham)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSanPham)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DonViTinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonViTinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuongBan) 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongBan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DonGia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayKhoiTao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayKhoiTao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayCapNhat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayCapNhat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HinhMinhHoa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HinhMinhHoa)
+        </dd>
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Cập nhật", "Edit", new { id = Model.MaSanPham }) |
+    @Html.ActionLink("Quay trở lại", "Index")
+</p>

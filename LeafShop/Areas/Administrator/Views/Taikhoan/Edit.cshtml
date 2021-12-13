@@ -1,0 +1,62 @@
+﻿@model LeafShop.Models.Taikhoan
+
+@{
+    ViewBag.Title = "Cập nhật tài khoản";
+}
+<style>
+    div a {
+        color: white;
+    }
+
+        div a:hover {
+            color: white;
+        }
+</style>
+<h2 style="font-size: 30px">Cập nhật tài khoản</h2>
+<hr />
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.USERNAME)
+        <div class="pt-4 pb-3">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Password</label>
+                        @Html.EditorFor(model => model.PASSWORD, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PASSWORD, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="md-form md-outline mt-0">
+                        <br />
+                        <label for="form15">Quản trị</label>
+                        <div class="form-group row">
+                            @Html.RadioButtonFor(model => model.Quantri, true)
+                            <span>Quản trị viên</span>
+
+                            @Html.RadioButtonFor(model => model.Quantri, false)
+                            <span>Nhân viên</span>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Tên nhân viên</label>
+                        @Html.DropDownList("MaNhanVien", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaNhanVien, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                        <div class="btn btn-warning">@Html.ActionLink("Quay trở lại", "Index")</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,88 @@
+﻿@model LeafShop.Models.ThuongHieu
+
+@{
+    ViewBag.Title = "Thêm thương hiệu";
+}
+<style>
+    div a {
+        color: white;
+    }
+        div a:hover {
+            color: white;
+        }
+</style>
+<h2 style="font-size: 30px">Thêm mới thương hiệu</h2>
+<hr />
+@using (Html.BeginForm("Create", "ThuongHieu", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="pt-4 pb-3">
+            <div class="row">
+
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    @*<h5 class="mb-4 pb-1">Mã thương hiệu</h5>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="md-form md-outline mt-0">
+                                    @Html.EditorFor(model => model.MaThuongHieu, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MaThuongHieu, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>*@
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Tên thương hiệu</label>
+                        @Html.EditorFor(model => model.TenThuongHieu, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenThuongHieu, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Địa chỉ</label>
+                        @Html.EditorFor(model => model.DiaChiThuongHieu, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DiaChiThuongHieu, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Điện thoại</label>
+                        @Html.EditorFor(model => model.DienThoaiThuongHieu, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DienThoaiThuongHieu, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Mô tả</label>
+                        @Html.EditorFor(model => model.MoTaThuongHieu, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MoTaThuongHieu, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Hình minh hoạ</label>
+                        <br />
+                        
+                        <img id="output" class="img-rounded" alt="Ảnh" width="200" height="200" src="~/Content/image/h0.png" />
+
+                        <input type="file" id="uploadhinh" name="ImageFile" accept="image/*" onchange="loadFile(event)" style="margin-top: 20px" />
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                        <div class="btn btn-warning">@Html.ActionLink("Quay trở lại", "Index")</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    var loadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>
+
+@if (ViewBag.Error != null)
+{
+    <br />
+    <div class="alert alert-danger col-lg-2" role="alert">@ViewBag.Error</div>
+}

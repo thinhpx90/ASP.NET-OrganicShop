@@ -1,0 +1,67 @@
+﻿@model LeafShop.Models.Taikhoan
+
+@{
+    ViewBag.Title = "Xóa tài khoản";
+}
+<style>
+    th, td {
+        padding: 10px;
+    }
+
+    div a {
+        color: white;
+    }
+
+        div a:hover {
+            color: white;
+        }
+
+    .w-50 {
+        width: 50%;
+    }
+</style>
+<div style="display:flex;justify-content:center;width:100%">
+    <div class="w-50">
+        <table border="1" style="width:100%;">
+            <tr>
+                <th>Tên nhân viên</th>
+                <td>@Model.NhanVien.TenNhanVien</td>
+            </tr>
+            <tr>
+                <th>Username</th>
+                <td>@Model.USERNAME</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>@Model.PASSWORD</td>
+            </tr>
+            <tr>
+                <th>Quản trị</th>
+                <td>@(Model.Quantri?"Quản trị viên":"Nhân viên")</td>
+            </tr>
+
+        </table>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color" style="margin-top:10px;text-align:center;">
+                <input type="submit" value="Xoá" class="btn btn-danger" onclick="return confirmDelete()" />
+                <div class="btn btn-warning">@Html.ActionLink("Quay trở lại", "Index")</div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+        function confirmDelete() {
+                var result = confirm('Bạn có chắc chắn muốn XÓA?')
+                if (result) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+</script>

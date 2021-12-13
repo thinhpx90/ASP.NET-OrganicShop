@@ -1,0 +1,72 @@
+﻿@model LeafShop.Models.DanhMuc
+
+@{
+    ViewBag.Title = "Xóa danh mục";
+}
+<h2 style="font-size: 30px">Xóa danh mục</h2>
+<style>
+    td, th {
+        padding: 10px;
+    }
+
+    div a {
+        color: white;
+    }
+
+        div a:hover {
+            color: white;
+        }
+
+    .w-50 {
+        width: 50%;
+    }
+</style>
+<hr />
+<div style="display:flex;justify-content:center;width:100%;">
+    <div style="margin-top:30px;" class="w-50">
+
+        <table width="100%" border="1">
+            <tr>
+                <th>Tên danh mục</th>
+                <td>@Model.TenDanhMuc</td>
+            </tr>
+            <tr>
+                <th>
+                    Danh mục cha
+                </th>
+                <td>
+                    @if (ViewBag.tenDMCha != null)
+                    {
+                        @ViewBag.tenDMCha
+                    }
+                </td>
+            </tr>
+        </table>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color" style=";margin-top:10px;text-align:center;">
+                <input type="submit" value="Xoá" class="btn btn-danger" onclick="return confirmDelete()" />
+                <div class="btn btn-warning">@Html.ActionLink("Quay trở lại", "Index")</div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    function confirmDelete() {
+        var result = confirm('Bạn có chắc chắn muốn XÓA?')
+        if (result) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+</script>
+@if (ViewBag.Error != null)
+{
+    <br />
+    <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+}

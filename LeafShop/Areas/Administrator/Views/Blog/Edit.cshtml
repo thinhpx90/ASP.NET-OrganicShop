@@ -1,0 +1,96 @@
+﻿@model LeafShop.Models.Blog
+
+@{
+    ViewBag.Title = "Cập nhật bài viết";
+    var ImagePath = Model.Anh != null ? Model.Anh : "~/Content/image/h0.png";
+}
+<script>
+    var loadFile = function (event) {
+        var image = document.getElementById('output');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+<h2 style="font-size: 30px">Cập nhật bài viết</h2>
+
+<style>
+    div a {
+        color: white;
+    }
+
+        div a:hover {
+            color: white;
+        }
+</style>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+@using (Html.BeginForm("Edit", "Blog", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="pt-4 pb-3">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @Html.HiddenFor(model => model.MaBaiViet)
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Tên nhân viên</label>
+                        @Html.DropDownList("MaNhanVien", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaNhanVien, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Tên danh mục blog</label>
+                        @Html.DropDownList("MaDanhMucBlog", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MaDanhMucBlog, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Tiêu đề</label>
+                        @Html.EditorFor(model => model.TieuDe, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TieuDe, "", new { @class = "text-danger" })
+                    </div>
+
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form14">Ảnh</label>
+                        <br />
+                        <img id="output" class="img-rounded" alt="Ảnh" width="200" height="200" src="@Url.Content(ImagePath)" />
+
+                        <input type="file" id="uploadhinh" name="ImageFile" accept="image/*" onchange="loadFile(event)" style="margin-top: 20px" />
+                    </div>
+
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Tóm tắt</label>
+                        @Html.EditorFor(model => model.Tomtat, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Tomtat, "", new { @class = "text-danger" })
+                    </div>
+
+                    <br />
+
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Ngày khởi tạo</label>
+                        @Html.EditorFor(model => model.NgayKhoiTao, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.NgayKhoiTao, "", new { @class = "text-danger" })
+                    </div>
+
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <label for="form15">Nội dung</label>
+                        @Html.EditorFor(model => model.Noidung, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Noidung, "", new { @class = "text-danger" })
+                    </div>
+
+                    <br />
+                    <div class="md-form md-outline mt-0">
+                        <input type="submit" value="Lưu" class="btn btn-primary" />
+                        <div class="btn btn-warning"> @Html.ActionLink("Quay trở lại", "Index")</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

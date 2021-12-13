@@ -1,0 +1,49 @@
+﻿@model IEnumerable<LeafShop.Models.DanhMuc>
+<link href='~/Content/css/custom_style9a76.css' rel='stylesheet' type='text/css' media='all' />
+
+<div class="zom_grr">
+    <div class='container slide_wrapper'>
+        <!-- left menu -->
+        <!-- end left menu -->
+        <div class='slider_wrap'>
+            <div id="conteneur">
+                <div class="header">
+                    <div class="menu_nav">
+                        <div id="onglet_gauche" class="gauche">
+                        </div>
+                        <ul class="menu_nav_li">
+                            @foreach (var item in Model)
+                            {
+                            <li class="line-text" >
+                                <a href="/SanPham/Category/@item.MaDanhMuc" class="link_menu_haut" style="display:flex;align-items:center;justify-content:center;">@item.TenDanhMuc</a>
+                                @if (item.DanhMuc1.Count > 0)
+                                {
+                                    <ul class="sub-menu-ol">
+                                        @foreach (var subitem in item.DanhMuc1)
+                                        {
+                                        <li>
+                                            <a href="/SanPham/Category/@subitem.MaDanhMuc">@subitem.TenDanhMuc</a>
+
+                                            @if (subitem.DanhMuc1.Count > 0)
+                                            {
+                                                <ul class="sub-menu-ol-2">
+                                                    @foreach (var subitem1 in subitem.DanhMuc1)
+                                                    {
+                                                        <li><a href="/SanPham/Category/@subitem1.MaDanhMuc">@subitem1.TenDanhMuc</a></li>
+                                                    }
+                                                </ul>
+                                            }
+
+                                        </li>
+                                        }
+                                    </ul>
+                                }
+                            </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

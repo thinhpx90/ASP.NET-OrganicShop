@@ -1,0 +1,96 @@
+﻿@model List<LeafShop.Models.ChiTietDatHang>
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    long? tongtien = 0;
+
+}
+
+<section id="content">
+    <div class="content-wrap">
+        <div class="container clearfix">
+                <div class="cart">
+                    @using (Html.BeginForm("Orders", "Cart", FormMethod.Post))
+                    {
+                    <div class='tbody'>
+                        @if (Model.Count == 0 || Model == null)
+                        {
+                            <h3>Chưa có sản phẩm nào trong giỏ hàng</h3>
+                            <br />
+                            <hr />
+                            <a href="@Url.Action("Index","Home")">Tiếp tục mua sắm</a>
+                        }
+
+                        @if (Model.Count > 0)
+                        {
+                            <div class='thead row hidden-xs'>
+                                <div class="col-sm-1 td cart-product-thumbnail">Sản phẩm</div>
+                                <div class="col-sm-4 td cart-product-name">Mô tả</div>
+                                <div class="col-sm-2 td cart-product-price">Đơn giá</div>
+                                <div class="col-sm-2 td cart-product-quantity">Số lượng</div>
+                                <div class="col-sm-2 td cart-product-subtotal">Thành tiền</div>
+                                <div class="col-sm-1 td cart-product-remove">Xoá</div>
+                            </div>
+                            for (var i = 0; i < Model.Count; i++)
+                            {
+                                @Html.HiddenFor(it => Model[i].MaSanPham);
+                                <div class="row cart_item">
+                                    <div class="td col-sm-1 cart-product-thumbnail">
+                                        <a href="#"><img src="@Model[i].SanPham.HinhMinhHoa" alt="@Model[i].SanPham.TenSanPham"></a>
+                                    </div>
+
+                                    <div class="td col-sm-4 cart-product-name">
+                                        <a href="#">
+                                            @Model[i].SanPham.TenSanPham
+                                        </a>
+                                    </div>
+
+                                    <div class="td col-sm-2 cart-product-price">
+                                        <span class="amount">@Model[i].DonGia</span>
+                                    </div>
+
+                                    <div class="td col-sm-2 cart-product-quantity">
+                                        <div class="quantity clearfix">
+                                            @*<input type="number" name="soluong[@i]" value="@Model[i].SoLuong" class="qty" id='product-quantity2updates_1068089026' />*@
+                                            @Html.EditorFor(item => Model[i].SoLuong, new { htmlAttributes = new { @class = "qty" } })
+                                        </div>
+                                    </div>
+
+                                    <div class="td col-sm-2 cart-product-subtotal">
+                                        <span class="amount">
+                                            @(Model[i].DonGia * Model[i].SoLuong)
+                                        </span>
+                                    </div>
+
+                                    <div class="td col-sm-1 cart-product-remove">
+                                        <a href="@Url.Action("DeleteFromCartByMaSP", "Cart", new { masp = Model[i].MaSanPham })" class="remove" title="Remove this item"><i class="fa fa-trash-o"></i></a>
+                                    </div>
+                                </div>
+                                tongtien += Model[i].DonGia * Model[i].SoLuong;
+                            }
+
+                            <div class='row total_price'>
+                                <div class='col-sm-2 col-xs-6 td col-sm-push-7'><h4 class='nomargin'>Tổng tiền </h4></div>
+                                <div class='col-md-3 col-xs-6 td col-sm-push-7'><span class="amount color lead"><strong>@tongtien đ</strong></span></div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
+                                    @*<div class="checkout-buttons clearfix">
+                                        <label for="note">Ghi chú </label>
+                                        <textarea style='height:85px' id="note" class='sm-form-control' name="ghichu" rows="8" cols="50">@ViewBag.GhiChu</textarea>
+                                    </div>*@
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12 topmargin nopadding">
+                                    <button type="submit" class="button button-3d nomargin fright">Cập nhật giỏ hàng</button>
+                                    <a class=" button button-3d notopmargin fright" href="@Url.Action("CheckOut","Cart", new {ghichu = ViewBag.GhiChu })">Thanh toán</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    }
+                </div>
+        </div>
+    </div>
+</section>
+

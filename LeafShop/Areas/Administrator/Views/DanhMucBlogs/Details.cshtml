@@ -1,0 +1,26 @@
+﻿@model LeafShop.Models.DanhMucBlog
+
+@{
+    ViewBag.Title = "Chi tiết danh mục bài viết";
+}
+
+<h2>Chi tiết danh mục bài viết</h2>
+<hr />
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenDanhMucBlog)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDanhMucBlog)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Cập nhật", "Edit", new { id = Model.MaDanhMucBlog }) |
+    @Html.ActionLink("Quay trở lại", "Index")
+</p>

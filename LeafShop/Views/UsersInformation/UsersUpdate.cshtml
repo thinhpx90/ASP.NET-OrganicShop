@@ -1,0 +1,67 @@
+﻿@model LeafShop.Models.KhachHang
+@{
+    ViewBag.Title = "UsersUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div style="width: 1100px;margin: 0 auto;background-color:#fff;height:500px;display:flex;align-items:center;">
+    <div style="width:100%;padding:10px 20px;">
+        @using (Html.BeginForm("UsersUpdate", "UsersInformation", FormMethod.Post, new { @id = "submit-form" }))
+        {
+            @Html.ValidationMessage("ErrorUpdate", new { @class = "text-danger" })
+            <fieldset>
+                <input type="hidden" value="@Model.MaKhachHang" name="MaKhachHang" />
+                <legend>Thông tin tài khoản</legend>
+                <div class="form-group d-md-flex align-items-md-center">
+                    <label class="control-label col-md-2" for="f-name">Họ và tên</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="TenKhachHang" placeholder="Họ và tên" value="@Model.TenKhachHang" required>
+                    </div>
+                </div>
+                <div class="form-group d-md-flex align-items-md-center">
+                    <label class="control-label col-md-2" for="l-name">Địa chỉ</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="DiaChiKhachHang" placeholder="Địa chỉ" value="@Model.DiaChiKhachHang" required>
+                    </div>
+                </div>
+                <div class="form-group d-md-flex align-items-md-center">
+                    <label class="control-label col-md-2" for="email">Email</label>
+                    <div class="col-md-10">
+                        <input type="email" class="form-control" name="Email" placeholder="Email" value="@Model.Email" required>
+                    </div>
+                </div>
+                <div class="form-group d-md-flex align-items-md-center">
+                    <label class="control-label col-md-2" for="number">Số điện thoại</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" name="DienThoaiKhachHang" placeholder="Số điện thoại" value="@Model.DienThoaiKhachHang" required>
+                    </div>
+                </div>
+                <div class="form-group d-md-flex align-items-md-center">
+                    <label class="control-label col-md-2" for="date">Ngày sinh</label>
+                    <div class="col-md-10">
+                        @{ 
+                            var date = @Model.NgaySinh.HasValue ? @Model.NgaySinh.Value.ToString("yyyy-MM-dd") : String.Empty;
+                        }
+                        <input type="date" class="form-control" name="NgaySinh" value="@date">
+                    </div>
+                </div>
+                <div class="form-group d-md-flex align-items-md-center">
+                    <label class="control-label col-md-2" for="gt">Giới tính</label>
+                    <div class="col-md-10">
+                        <input type="radio" checked="@Model.GioiTinh" name="GioiTinh" value="true" id="Male" />
+                        <label for="Male">Nam</label>
+
+                        <input type="radio" checked=@(!Model.GioiTinh) name="GioiTinh" value="false" id="Female" />
+                        <label for="Female">Nữ</label>
+                    </div>
+                </div>
+                <input type="hidden" name="TrangThai" value="@Model.TrangThai" />
+            </fieldset>
+            <div class="terms">
+                <div style="text-align:center">
+                    <input type="submit" value="Cập nhật" class="btn">
+                </div>
+            </div>}
+    </div>
+</div>

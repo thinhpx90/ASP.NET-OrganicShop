@@ -1,0 +1,55 @@
+﻿@model LeafShop.Models.ThuongHieu
+
+@{
+    ViewBag.Title = "Chi tiết";
+}
+
+<h2>Chi tiết thương hiệu</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenThuongHieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenThuongHieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChiThuongHieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChiThuongHieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DienThoaiThuongHieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoaiThuongHieu)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTaThuongHieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MoTaThuongHieu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AnhThuongHieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AnhThuongHieu)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Cập nhật", "Edit", new { id = Model.MaThuongHieu }) |
+    @Html.ActionLink("Quay trở lại", "Index")
+</p>

@@ -1,0 +1,46 @@
+﻿<
+<link href="~/Content/css/style9a76.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout_Product.cshtml";
+}
+
+<h2>Category</h2>
+
+@foreach (var item in Model)
+{
+    <div class="col-sm-3 col-sm-6 col-xs-12 noleftpadding norightpadding">
+        <div class="border-product">
+
+            <div class="product clearfix">
+
+                <div class="haravan-product-reviews-badge">
+
+                </div>
+                <div class="product-image">
+
+                    <a href="products/banh-gao-lut-bi-ngo-cho-be-alvins-30g.html"><img src="" alt=""></a>
+                    <div class="product-overlay">
+                        <a href='products/banh-gao-lut-bi-ngo-cho-be-alvins-30g.html' class='add-to-cart' data-toggle='tooltip' title='Lựa chọn'><i class='fa fa-shopping-cart'></i><span class='hidden-md hidden-lg'> Lựa chọn</span></a>
+                        <a href="#product-pop-up" class="item-quick-view fancybox-fast-view hidden-sm hidden-xs" product_url="/products/banh-gao-lut-bi-ngo-cho-be-alvins-30g" data-toggle='tooltip' title='Xem nhanh'><i class="fa fa-eye"></i><span class='hidden-md hidden-lg'> Xem nhanh</span></a>
+                    </div>
+                </div>
+                <div class="product-title">
+                    @Html.DisplayFor(modelItem => item.TenSanPham)
+
+                </div>
+                <div class="product-desc">
+                    <div class="product-price">
+                        <ins> 90,000₫ </ins>
+                    </div>
+
+                    <div class="buy_alls">
+                        <a href="javascript::0">Hết Hàng</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+}

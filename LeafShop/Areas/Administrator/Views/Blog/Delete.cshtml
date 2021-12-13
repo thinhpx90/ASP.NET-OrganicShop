@@ -1,0 +1,87 @@
+﻿@model LeafShop.Models.Blog
+
+@{
+    ViewBag.Title = "Xóa bài viết";
+}
+<h2 style="font-size: 30px">Xóa bài viết</h2>
+
+<style>
+    th, td {
+        padding: 10px;
+    }
+
+    div a {
+        color: white;
+    }
+
+        div a:hover {
+            color: white;
+        }
+
+    .w-50 {
+        width: 50%;
+    }
+</style>
+<hr />
+<div>
+
+    <table style="width:100%" border="1">
+        <tr>
+            <th style="width: 20%;">Tên nhân viên viết bài:</th>
+            <td>@Model.NhanVien.TenNhanVien</td>
+        </tr>
+        <tr>
+            <th>Danh mục bài viết:</th>
+            <td>@Model.DanhMucBlog.TenDanhMucBlog</td>
+        </tr>
+        <tr>
+            <th>Tiêu đề:</th>
+            <td>@Model.TieuDe</td>
+        </tr>
+        <tr>
+            <th>Ảnh:</th>
+            <td>
+                @{ var ImagePath = Model.Anh != null ? Model.Anh : "~/Content/image/h0.png"; }
+                <img src="@Url.Content(ImagePath)" style="width:200px;height: 200px;" />
+            </td>
+        </tr>
+        <tr>
+            <th>Tóm tắt:</th>
+            <td>@Model.Tomtat</td>
+        </tr>
+        <tr>
+            <th>Ngày khởi tạo:</th>
+            <td>@Model.NgayKhoiTao</td>
+        </tr>
+        <tr>
+            <th>Nội dung:</th>
+            <td>@Model.Noidung</td>
+        </tr>
+    </table>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color" style="margin-top:10px;text-align:center;">
+            <input type="submit" value="Xoá" class="btn btn-danger" onclick="return confirmDelete()" />
+            <div class="btn btn-warning">@Html.ActionLink("Quay trở lại", "Index")</div>
+        </div>
+    }
+</div>
+<script>
+    function confirmDelete() {
+        var result = confirm('Bạn có chắc chắn muốn XÓA?')
+        if (result) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+</script>
+@if (ViewBag.Error != null)
+{
+    <br />
+    <div class="alert alert-danger" role="alert">@ViewBag.Error</div>
+}

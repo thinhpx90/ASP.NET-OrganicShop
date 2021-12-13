@@ -1,0 +1,591 @@
+﻿@model PagedList.IPagedList<LeafShop.Models.SanPham>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://kit.fontawesome.com/e38e0bb8bb.js" crossorigin="anonymous"></script>
+
+<script>
+var callBackQV = function(variant, selector) {
+	//console.log('callBackQV  is functioning...');
+	var $tagPrice = '#product-pop-up .product-price ins';
+	var $tagPriceCompare = '#product-pop-up .product-price del';
+	var $tagProductSection = '#ProductDetailsFormQV';
+	update_variant(variant, $tagPrice, $tagPriceCompare, '#addtocartQV', $tagProductSection);
+
+	Aecomapp.tranBox("0");
+	var path = selector.product.url;
+	var title = $(this).text();
+	var url = window.location.protocol + "//" + window.location.host + path + "?title=" + title;
+	$.ajax({
+		url: url,
+		success: function(response) {
+			var desText = $(response).find(".page_title h1").text().trim();
+			var descriptionText = $(response).find(".aetabs-tabs").text().trim();
+
+			$(".ajax-modal-title h2").text(desText);
+			// $("#product-pop-up .description").html(descriptionText);
+		}
+	});
+}
+
+/*
+   *  strip_html_js
+   *
+   * ref: http://stackoverflow.com/questions/822452/strip-html-from-text-javascript
+   * author phong.nguyen 20150806
+   */
+function strip_html_js(html)
+{
+	var tmp = document.createElement("DIV");
+	tmp.innerHTML = html;
+	return tmp.textContent || tmp.innerText || "";
+}
+
+
+
+
+jQuery(document).ready(function() {
+	ega.init();
+})
+
+</script>
+<section id="page-title">
+    <div class="container clearfix">
+
+        <ol class="breadcrumb col-md-6 col-sm-6">
+            <li><a href="/">Trang chủ</a></li>
+
+            <li><a href="/SanPham/Index">Danh mục</a></li>
+            <li class="active">@ViewBag.nameCategory</li>
+        </ol>
+    </div>
+</section>
+<section id="content">
+    <div class="content-wrap">
+        <div class="container clearfix">
+            <div class='collection_banner'>
+
+            </div>
+            <div class='row'>
+                <div class="col-xs-12">
+                </div>
+                <div class="post_content pull-right col-sm-12 col-xs-12 col-md-9"
+                     style="margin-bottom: 15px !important;">
+                    @ViewBag.nameCategory
+                    <div id="shop" class="product-3 clearfix">
+                        <div class="dess">
+                        </div>
+                        <div class='sort-wrapper'>
+                            <div class="browse-tags"
+                                 style='margin-bottom:20px;line-height: 30px; '>
+                                <div class="col-sm-6 col-md-7 noleftpadding">
+                                    <p class="subtext nobottommargin">
+                                        Có <span class='require_symbol'>@ViewBag.totalSP</span> sản phẩm.
+                                    </p>
+                                </div>
+                                <div class='col-sm-6 col-md-5 noleftpadding text-right norightpadding' style="margin-bottom:30px;">
+                                    <span class='col-sm-4 col-xs-4 nopadding text-left'>Sắp xếp theo:</span>
+                                    <div class="dropdown">
+                                        @if (ViewBag.CurrentSort == null)
+                                        {
+                                            <button class="dropbtn">Thứ tự</button>
+                                        }
+                                        else
+                                        {
+                                            if (ViewBag.CurrentSort == "ten_asc")
+                                            {
+                                                <button class="dropbtn">A → Z</button>
+                                            }
+                                            else if (ViewBag.CurrentSort == "ten_desc")
+                                            {
+                                                <button class="dropbtn">Z → A</button>
+
+                                            }
+                                            else if (ViewBag.CurrentSort == "gia_asc")
+                                            {
+                                                <button class="dropbtn">Giá tăng dần</button>
+
+                                            }
+                                            else if (ViewBag.CurrentSort == "gia_desc")
+                                            {
+                                                <button class="dropbtn">Giá giảm dần</button>
+
+                                            }
+                                            else if (ViewBag.CurrentSort == "ngay_desc")
+                                            {
+                                                <button class="dropbtn">Ngày giảm dần</button>
+
+                                            }
+                                            else if (ViewBag.CurrentSort == "ngay_dasc")
+                                            {
+                                                <button class="dropbtn">Ngày tăng dần</button>
+
+                                            }
+                                            else if (ViewBag.CurrentSort == "slb_asc")
+                                            {
+                                                <button class="dropbtn">Số lượng bán</button>
+
+                                            }
+                                            else if (ViewBag.CurrentSort == "sl_asc")
+                                            {
+                                                 <button class="dropbtn">Sản phẩm nổi bật</button>
+                                            }
+                                        }
+                                        <ul class="dropdown-content" style="z-index:1000;">
+                                            @Html.ActionLink("Sản phẩm nổi bật", "Category", new { sortOrder = ViewBag.SapTheoSoLuong, currentFilter = ViewBag.CurrentFilter })
+                                            @Html.ActionLink("Giá: tăng dần", "Category", new { sortOrder = ViewBag.GiaTangDan, currentFilter = ViewBag.CurrentFilter })
+                                            @Html.ActionLink("Giá: giảm dần", "Category", new { sortOrder = ViewBag.GiaGiamDan, currentFilter = ViewBag.CurrentFilter })
+                                            @Html.ActionLink("Tên: A-Z", "Category", new { sortOrder = ViewBag.SapTheoTenAZ, currentFilter = ViewBag.CurrentFilter })
+                                            @Html.ActionLink("Tên: Z-A", "Category", new { sortOrder = ViewBag.SapTheoTenZA, currentFilter = ViewBag.CurrentFilter })
+                                            @Html.ActionLink("Cũ Nhất", "Category", new { sortOrder = ViewBag.SapTheoNgaycCuNhat, currentFilter = ViewBag.CurrentFilter })
+                                            @Html.ActionLink("Mới nhất", "Category", new { sortOrder = ViewBag.SapTheoNgaycMoiNhat, currentFilter = ViewBag.CurrentFilter })
+                                            @Html.ActionLink("Bán chạy nhất", "Category", new { sortOrder = ViewBag.SapTheoSoLuongBan, currentFilter = ViewBag.CurrentFilter })
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id='grid_pagination'>
+                            <div class='grid'>
+                                @foreach (var product in Model)
+                                {
+                                    <div class='col-sm-4 col-xs-12 noleftpadding norightpadding product_single'>
+                                        <div class="product clearfix">
+
+                                            <div class="haravan-product-reviews-badge" data-id="1003020409">
+                                            </div>
+                                            <div class="product-image">
+                                                <a href="/SanPham/Detail/@product.MaSanPham">
+                                                    <img src="@product.HinhMinhHoa"
+                                                         alt="@product.TenSanPham">
+                                                </a>
+                                                <div class="product-overlay">
+                                                    <a href="#product-pop-up" style="display:inline-flex;justify-content:center;align-items:center;" class="item-quick-view fancybox-fast-view hidden-sm hidden-xs" onclick="loadsp(@product.MaSanPham)" product_url="#" data-toggle='tooltip' title='Xem nhanh'><i class="fa fa-eye"></i><span class='hidden-md hidden-lg'> Xem nhanh</span></a>
+                                                </div>
+                                            </div>
+                                            <div class="product-title">
+                                                <h4>
+                                                    <a href="/SanPham/Detail/@product.MaSanPham"
+                                                       title="@product.TenSanPham">
+                                                        @product.TenSanPham
+                                                    </a>
+                                                </h4>
+                                                @*<span>3489940049213</span>*@
+                                            </div>
+                                            <div class="product-desc">
+
+                                                <div class="product-price">
+
+                                                    <ins> @String.Format("{0:0,0đ}", product.DonGia) </ins>
+                                                </div>
+                                                <div class="buy_all">
+                                                    @if (product.SoLuong == 0)
+                                                    {
+                                                        <div class="buy_alls">
+                                                            <a href="javascript::0">Hết Hàng</a>
+                                                        </div>
+                                                    }
+                                                    @if (product.SoLuong > 0)
+                                                    {
+                                                        <div class="buy_all">
+                                                            <a class="product_quick_add" data-toggle='tooltip' href="#" onclick="AddToCart(@product.MaSanPham,1)">Mua Ngay</a>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                            <div class='pagination_wrapper'>
+
+                                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                                @Html.PagedListPager(Model, page => Url.Action("Category", new
+                           {
+                               page,
+                               sortOrder = ViewBag.CurrentSort
+                           }))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar nobottommargin  left-sidebar col-sm-12 col-xs-12 col-md-3">
+                    <div class="sidebar-widgets-wrap">
+                        <div class="left-sidebar">
+                            <div class="panel-heading">
+                                <a data-toggle="collapse" href="#filter_group">
+                                    <h4 class="panel-title">
+                                        Danh mục sản phẩm
+                                    </h4>
+                                </a>
+                            </div>
+
+                            <ul class="lv1">
+                                @foreach (var dm in @ViewBag.dmSP)
+                                {
+                                <li style="position:relative">
+                                    <a  href="/SanPham/Category/@dm.MaDanhMuc">
+                                        @dm.TenDanhMuc
+
+                                    </a>
+                                    <i class="fa fa-angle-right right-icon one1" style="position:absolute;right:0;top:10px;"
+                                       aria-hidden="true"></i>
+                                    @if (dm.DanhMuc1.Count > 0)
+                                    {
+                                        <ul class="lv2">
+                                            @foreach (var dmCon in dm.DanhMuc1)
+                                            {
+                                            <li style="position:relative">
+                                                <a href="/SanPham/Category/@dmCon.MaDanhMuc">
+                                                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                                    @dmCon.TenDanhMuc
+                                                </a>
+                                                <i class="fa fa-angle-right right-icon one2" style="position:absolute;right:0;top:5px;"
+                                                   aria-hidden="true"></i>
+                                                @if (dmCon.DanhMuc1.Count > 0)
+                                                {
+                                                    <ul class="lv3">
+                                                        @foreach (var dmChau in dmCon.DanhMuc1)
+                                                        {
+                                                            <li>
+                                                                <a href="/SanPham/Category/@dmChau.MaDanhMuc">
+                                                                    <i class="fa fa-angle-double-right"
+                                                                       aria-hidden="true"></i> @dmChau.TenDanhMuc
+                                                                </a>
+                                                            </li>
+                                                        }
+
+
+                                                    </ul>
+                                                }
+
+                                            </li>
+                                            }
+
+                                        </ul>
+                                    }
+                                </li>
+
+
+                                }
+                            </ul>
+                        </div>
+                        <style>
+                            .right-icon {
+                                float: right;
+                                padding-right: 10px;
+                            }
+
+                            .lv1 {
+                                list-style: none;
+                                border: 1px solid #ccc;
+                                border-top: none;
+                            }
+
+                                .lv1 > li {
+                                    border-bottom: 1px solid #ccc;
+                                }
+
+                                    .lv1 > li > a {
+                                        color: #000;
+                                        padding: 5px 10px;
+                                        width: 100%;
+                                        display: block;
+                                    }
+
+                            .lv2 {
+                                list-style: none;
+                                display: none;
+                            }
+
+                                .lv2 > li {
+                                    border-top: 1px solid #ccc;
+                                }
+
+                                .lv2 li > a {
+                                    font-size: 12px;
+                                    color: #000;
+                                    width: 100%;
+                                    padding: 3px 20px;
+                                    display: block;
+                                }
+
+                                .lv2 li:last-child,
+                                .lv1 > li:last-child,
+                                .lv3 li:last-child {
+                                    border-bottom: none;
+                                }
+
+                            .lv3 {
+                                display: none;
+                            }
+
+                                .lv3 > li {
+                                    border-top: 1px solid #ccc;
+                                    list-style: none;
+                                }
+
+                                .lv3 li > a {
+                                    font-size: 12px;
+                                    color: #000;
+                                    width: 100%;
+                                    padding: 3px 0px;
+                                    padding-left: 30px;
+                                    display: block;
+                                }
+                        </style>
+                        <script>
+                            $(document).ready(function () {
+                                $('.one1').click(function () {
+                                    if ($(this).next('.lv2').css('display') == ('none')) {
+                                        $('.lv2').hide();
+                                        $(this).next('.lv2').show();
+                                    } else {
+                                        $(this).next('.lv2').hide();
+                                    }
+                                });
+                            });
+
+
+                            $(document).ready(function () {
+                                $('.one2').click(function () {
+                                    if ($(this).next('.lv3').css('display') == ('none')) {
+                                        $('.lv3').hide();
+                                        $(this).next('.lv3').show();
+                                    } else {
+                                        $(this).next('.lv3').hide();
+                                    }
+                                });
+                            });
+                            $(document).ready(function () {
+                                $("ul.lv2 > li a").each(function (item) {
+                                    if (window.location.pathname === $(this).attr("href")) {
+                                        
+                                        $(this).closest('ul.lv2').show();
+                                    }
+                                });
+                                $("ul.lv1 > li > a").each(function (item) {
+                                    if (window.location.pathname === $(this).attr("data-href")) {
+                                        $(this).closest('ul.lv1 > li > a').addClass("active");
+                                    }
+                                });
+                            });
+
+                        </script>
+                       
+                        <script>
+                            $(document).ready(function () {
+
+                                $('#sortControl option[sort_by=manual]').attr('selected', true);
+
+
+                                $(".widget_links li input").click(function () {
+                                    var searchString = "";
+                                    $('#sortControl option[sort_by=manual]').attr('selected', true);
+                                    searchString = getStringFilter($(this));
+                                    var shop_url = '../index.html';
+                                    var urlState = shop_url + '/' + searchString;
+                                    window.history.pushState(null, null, urlState);
+                                    var url_final = '/' + searchString + '&view=grid_and_control';
+                                    loadResultBy(url_final, $("#shop"));
+                                    //$(this).parent().find('i').toggleClass('hidden');
+                                });
+                            });
+                            $('#filter_group .widget_links > a').click(function () {
+                                var $current = $(this).next().attr('id');
+                                $.each($('#filter_group .widget_links .panel-collapse'), function () {
+                                    if ($(this).attr('id') != $current) {
+                                        $(this).removeClass('in');
+                                    }
+                                })
+                            })
+                        </script>
+
+
+               
+                      
+                        <div class='hidden-xs hidden-sm'>
+
+                            @*<div class="widget clearfix">
+
+                                    <h4><a href='sale.html'>Sản phẩm khuyến mãi</a></h4>
+                                    <div id="post-list-footer" class='sidebar_menu'>
+                                    </div>
+                                </div>*@
+                            <div class="widget clearfix">
+                                <h4><a href='cham-soc-da-mat.html'>Sản phẩm nổi bật</a></h4>
+                                <div id="Popular-item" class='sidebar_menu'>
+                                    @foreach (var spNoiBat in @ViewBag.spNoiBat)
+                                    {
+                                        <div class="spost clearfix">
+                                            <div class="entry-image">
+                                                <a href="/SanPham/Detail/@spNoiBat.MaSanPham">
+                                                    <img src="@spNoiBat.HinhMinhHoa"
+                                                         alt="Dầu tầm xuân hữu cơ Gravier 50ml">
+                                                </a>
+                                            </div>
+                                            <div class="entry-c">
+                                                <div class="entry-title">
+                                                    <h4>
+                                                        <a href="/SanPham/Detail/@spNoiBat.MaSanPham">
+                                                            @spNoiBat.TenSanPham
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <ul class="entry-meta">
+                                                    <li class="color">
+                                                        <ins>@String.Format("{0:0,0đ}", spNoiBat.DonGia)</ins>
+
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            @*<div class="widget clearfix">
+
+                                <h4>Sản phẩm vừa xem</h4>
+                                <div class="widget-last-view sidebar_menu">
+                                </div>
+                            </div>*@
+                            <script>
+                                $(document).ready(function () {
+                                    var $strHTML = get_viewed_items_html('');
+                                    $('.widget .widget-last-view').html($strHTML);
+                                })
+
+                                function getCart() {
+                                    $(".top-cart-content").empty();
+                                    $.ajax({
+                                        type: "POST",
+                                        contentType: 'application/json',
+                                        url: "/Cart/getCart",
+                                        success: function (response) {
+                                            if (response.length == 0) {
+                                                $(".top-cart-content").append('<div class="top-cart-items">Không có sản phẩm nào trong giỏ hàng</div>');
+                                                return;
+                                            }
+                                            $(".top-cart-content").append('<div class="top-cart-items"></div>');
+                                            let total = 0;
+                                            $.each(response, function (index) {
+                                                total += response[index].SoLuong;
+                                                $(".top-cart-items").append('<div class="top-cart-item clearfix">'
+                                                    + '<input type="hidden" class="item_id" value="1008322895">'
+                                                    + '<input type="hidden" class="item_qty" value="' + response[index].SoLuong + ' ">'
+                                                    + '<input type="hidden" class="item_unit_price_not_formated" value="' + response[index].DonGia + '">'
+                                                    + ' <div class="top-cart-item-image">'
+
+                                                    + ' <a href="#"><img src="' + response[index].SanPham.HinhMinhHoa + '" alt=""></a>'
+                                                    + '</div>'
+                                                    + '     <div class="top-cart-item-desc">'
+                                                    + '  <a href="/products/tinh-dau-tea-tree-huu-co-gravier-10ml">' + response[index].SanPham.TenSanPham + '</a>'
+                                                    + '    <span class="top-cart-item-price">' + response[index].DonGia + '</span>'
+                                                    + '    <span class="top-cart-item-quantity">x ' + response[index].SoLuong + '</span>'
+                                                    + '    <a class="top_cart_item_remove" onclick="deleteFromCart(' + response[index].SanPham.MaSanPham + ');"> '
+                                                    + '<i class="fa fa-times-circle"></i>'
+                                                    + '  </a ></div ></div >'
+                                                )
+                                            })
+                                            $(".top_cart_qty").html(total);
+                                            $(".top-cart-content").append('<div class="top-cart-action clearfix">'
+                                                + ' <button onclick="redirect()" class="button button-small nomargin fright">Xem giỏ hàng</button>'
+                                                + ' </div >')
+                                        },
+                                        error: function (response) {
+
+                                        }
+                                    });
+                                }
+                                function redirect() {
+                                    window.location.href = "../Cart/Orders";
+                                }
+
+                                function loadsp(id) {
+                                    $.ajax({
+                                        type: "POST",
+                                        data: { masp: id },
+                                        url: "/SanPham/getProductDetail",
+                                        success: function (response) {
+                                            $("#tensp").html(response.TenSanPham);
+                                            $("#anhmh").attr("src", response.HinhMinhHoa);
+                                            $("#giasp").html(response.DonGia);
+                                            $("#product_quantity1").val(1);
+                                            if (response.SoLuong > 0) {
+                                                $("#addtocartQV").html("Thêm vào giỏ");
+                                                $("#addtocartQV").removeAttr("disabled");
+                                            } else {
+                                                $("#addtocartQV").html("Hết hàng");
+                                                $("#addtocartQV").attr("disabled", "disabled");
+                                            }
+                                            $("#motasp").html(response.MoTa);
+                                            $("#addtocartQV").attr("onclick", "AddToCart2(" + response.MaSanPham + ")");
+                                        },
+                                        error: function (response) {
+
+                                        }
+                                    });
+                                }
+
+                                function AddToCart2(id) {
+                                    var soluong = $("#product_quantity1").val();
+                                    AddToCart(id, soluong);
+                                    $(".fancybox-close").click();
+                                }
+
+
+                                function AddToCart(id) {
+                                    $.ajax({
+                                        type: "POST",
+                                        contentType: 'application/json',
+                                        data: JSON.stringify({ "MaSanPham": id, "SoLuong": 1 }),
+                                        url: "/Cart/AddToCart",
+                                        success: function (response) {
+                                            if (response.status) {
+                                                getCart();
+                                            }
+                                        },
+                                        error: function (response) {
+                                        },
+                                    });
+                                }
+
+                                function deleteFromCart(id) {
+                                    $.ajax({
+                                        type: "POST",
+                                        data: { id: id },
+                                        url: "/Cart/DeleteFromCart",
+                                        success: function (response) {
+                                            if (response.status) {
+                                                getCart();
+                                            }
+                                        },
+                                        error: function (response) {
+
+                                        },
+
+                                    });
+                                }
+                            </script>
+
+                            <div class="widget clearfix">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@*<script>
+        $(document).ready(function () {
+            $("#sortControl").change(function () {
+                var empid = @ViewBag.idCategory;
+                var sort = $("#sortControl").val();
+                location.href = '@Url.Action("Category", "SanPham")' + '?currentSort=' + sort;
+            });
+        })
+    </script>*@

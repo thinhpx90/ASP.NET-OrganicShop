@@ -1,0 +1,87 @@
+﻿@model LeafShop.Models.KhachHang
+
+@{
+    ViewBag.Title = "Chi tiết khách hàng";
+}
+
+<h2>Chi tiết khách hàng</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenKhachHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenKhachHang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChiKhachHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaChiKhachHang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DienThoaiKhachHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DienThoaiKhachHang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenDangNhap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDangNhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MatKhau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MatKhau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgaySinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgaySinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </dt>
+
+        <dd>
+            @(Model.GioiTinh?"Nam":"Nữ")
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </dt>
+
+        <dd>
+            @(Model.TrangThai?"Đang hoạt động":"Không hoạt động")
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Cập nhật", "Edit", new { id = Model.MaKhachHang }) |
+    @Html.ActionLink("Quay trở lại", "Index")
+</p>

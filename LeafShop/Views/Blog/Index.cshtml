@@ -1,0 +1,200 @@
+﻿@model PagedList.IPagedList<LeafShop.Models.Blog>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section id="page-title">
+    <div class="container clearfix">
+
+        <ol class="breadcrumb col-md-6 col-sm-6">
+            <li><a href="../index.html">Trang chủ</a></li>
+
+            <li class='active'>Tất cả bài viết</li>
+
+        </ol>
+    </div>
+</section>
+<section id="content">
+    <div class="content-wrap">
+        <div class="container clearfix" style="padding-top:20px;">
+            <div class='row'>
+                <div class='input--search sidebar_menu visible-xs'>
+                    <div class='input--search sidebar_menu'>
+                        <form action="/Blog/Index" style='margin-bottom: 0px'>
+                            <input required id="searchtext" name="searchString" maxlength="40" class="form-control input-search" type="text" size="20" placeholder="Từ khóa tìm kiếm...">                                    <button class="gid-btn" type='submit'>Tìm</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- Post Content
+                ============================================= -->
+
+                <div class="postcontent nobottommargin clearfix col-sm-9">
+                    <!-- Posts
+    ============================================= -->
+                    <div id="posts" class="small-thumbs">
+                        @foreach (var blog in Model)
+                        {
+                            <div class="entry clearfix">
+                                <div class="entry-image">
+                                    <a href="/Blog/Detail/@blog.MaBaiViet" data-lightbox="image"><img class="image_fade" src="@blog.Anh" alt="Quốc gia đầu tiên cấm kem chống nắng để bảo vệ san hô"></a>
+                                </div>
+                                <div class="entry-c">
+                                    <div class="entry-title">
+                                        <h2><a href="/Blog/Detail/@blog.MaBaiViet">@blog.TieuDe</a></h2>
+                                    </div>
+                                    <ul class="entry-meta clearfix">
+                                        <li><i class="fa fa-calendar"></i> @{
+                                            var ngayKhoiTao = blog.NgayKhoiTao.HasValue ? blog.NgayKhoiTao.Value.ToString("yyyy/MM/dd") : String.Empty;
+                                        } @ngayKhoiTao</li>
+                                        <li><i class="fa fa-user"></i> @blog.NhanVien.TenNhanVien</li>
+
+
+                                        @*<li><a href="kien-thuc-chung/quoc-gia-dau-tien-cam-kem-chong-nang-de-bao-ve-san-ho.html#comments"><i class="fa fa-comments"></i> 0 Bình luận</a></li>*@
+                                        <!--<li><a href="#"><i class="fa fa-camera-retro"></i></a></li>-->
+                                    </ul>
+                                    <div class="entry-content">
+                                        <!-- a -->
+                                        @blog.Tomtat<a href="/Blog/Detail/@blog.MaBaiViet" class="more-link">Xem tiếp</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+
+
+
+
+                    </div><!-- #posts end -->
+                    <!-- Pagination
+    ============================================= -->
+                    Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new
+               {
+                   page,
+                   currentFilter = ViewBag.CurrentFilter
+               }))
+
+
+                </div><!-- .postcontent end -->
+                <!-- Sidebar
+                ============================================= -->
+                <div class="sidebar nobottommargin col_last clearfix hidden-xs col-sm-3">
+                    <div class="sidebar-widgets-wrap">
+                        <div class='widget widget_links clearfix'>
+                            <h4>
+                                Tìm kiếm bài viết
+                            </h4>
+                            <div class='input--search sidebar_menu'>
+                                <form action="/Blog/Index" style='margin-bottom: 0px'>
+                                    <input required id="searchtext" name="searchString" maxlength="40" class="form-control input-search" type="text" size="20" placeholder="Từ khóa tìm kiếm...">                                    <button class="gid-btn" type='submit'>Tìm</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- categories -->
+
+                        <div class="widget widget_links clearfix">
+                            <h4>Danh mục</h4>
+                            <ul class='sidebar_menu'>
+
+                                @foreach (var dm in @ViewBag.listDM)
+                                {
+                                    <li><a href="/Blog/Category/@dm.MaDanhMucBlog">@dm.TenDanhMucBlog</a></li>
+                                }
+
+
+                            </ul>
+                        </div>
+
+                        <!-- end categories -->
+                        <!-- recent article -->
+
+                        <div class="widget clearfix">
+                            <h4 style=''><a href='#'>Bài viết mới nhất</a></h4>
+
+                            <div class="tab-container sidebar_menu">
+
+                                <!--<div class="tab-content clearfix" id="tabs-1">-->
+                                @foreach (var baiViet in @ViewBag.blogMoiNhat)
+                                {
+                                    <div class="spost clearfix">
+                                        <div class="entry-image">
+                                            <a href="/Blog/Detail/@baiViet.MaBaiViet" class="nobg a-circle"><img class="img-circle-custom" src="@baiViet.Anh" alt="@baiViet.TieuDe"></a>
+                                        </div>
+                                        <div class="entry-c">
+                                            <div class="entry-title">
+                                                <h4><a href="/Blog/Detail/@baiViet.MaBaiViet">@baiViet.TieuDe</a></h4>
+                                            </div>
+                                            @*<ul class="entry-meta">
+                                                <li><a href='/Blog/Detail/@baiViet.MaBaiViet'><i class="fa fa-comments"></i> 0 bình luận</a></li>
+                                            </ul>*@
+                                        </div>
+                                    </div>
+                                }
+
+
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="widget clearfix" style='overflow:hidden;'>
+
+
+
+                            <div style="width: 100%;">
+                                <!-- Page plugin's width will be 180px -->
+                                <div class="fb-page" data-href="https://www.facebook.com/leafshop.vn/" data-width="320"></div>
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+                        
+
+
+                    </div>
+                    <style>
+                        .gid-btn {
+                            background: none;
+                            border: solid 1px #eee;
+                            margin-top: 10px;
+                            padding: 8px 15px;
+                            background-color: #499644;
+                            color: #fff;
+                        }
+                    </style>
+                </div>
+                <!-- .sidebar end -->
+            </div>
+        </div>
+
+    </div>
+    <style>
+        .blog-title {
+            border-bottom: solid 1px #eee;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            display: block;
+            padding: 8px 15px;
+            background: #499644;
+            color: #fff;
+        }
+
+            .blog-title a {
+                color: #fff;
+                text-transform: none;
+                font-size: 14px;
+            }
+
+                .blog-title a span {
+                    font-size: 12px;
+                }
+    </style>
+</section>

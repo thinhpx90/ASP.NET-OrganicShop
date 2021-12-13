@@ -1,0 +1,515 @@
+﻿@model List<LeafShop.Models.ChiTietDatHang>
+@{
+    Layout = null;
+    long? tamtinh = ViewBag.TongTien;
+    long? tongtien = tamtinh + 35000;
+}
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" class="flexbox">
+<head>
+    <link rel="shortcut icon" href="//theme.hstatic.net/1000104489/1000257823/14/favicon.png?v=3663" type="image/png" />
+    <title>
+        Leaf Organic - Natural & Organic Care - Thanh toán đơn hàng
+    </title>
+
+
+    <meta name="description" content="Leaf Organic - Natural &amp; Organic Care - Thanh to&#225;n đơn h&#224;ng" />
+
+    <link href='//hstatic.net/0/0/global/checkouts.css?v=1.1' rel='stylesheet' type='text/css' media='all' />
+    <link href='//theme.hstatic.net/1000104489/1000257823/14/check_out.css?v=3663' rel='stylesheet' type='text/css' media='all' />
+    <script src='//hstatic.net/0/0/global/jquery.min.js' type='text/javascript'></script>
+
+    <script src='//hstatic.net/0/0/global/jquery.validate.js' type='text/javascript'></script>
+
+    <style>
+
+
+        form#form_update_shipping_method {
+            position: relative;
+        }
+
+        .footer-powered-by {
+            text-align: center;
+            color: #bbb5b5;
+            font-size: 0.65000em;
+        }
+
+        .order-checkout__loading {
+            position: static;
+        }
+
+        .order-checkout__loading--box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            display: -webkit-flex;
+            display: flex;
+            opacity: 0;
+            visibility: hidden;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+
+            .order-checkout__loading--box.show {
+                z-index: 2;
+                visibility: visible;
+                opacity: 1;
+            }
+
+        .order-checkout__loading--circle {
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #5cabe0;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            margin: 0;
+            -webkit-transform-origin: 50%;
+            -o-transform-origin: 50%;
+            -ms-transform-origin: 50%;
+            transform-origin: 50%;
+            -moz-animation: spin 700ms infinite linear;
+            -ms-animation: spin 1.5s infinite linear;
+            -webkit-animation: spin 700ms infinite linear;
+            -o-animation: spin 700ms infinite linear;
+            animation: spin 700ms infinite linear;
+            z-index: 1;
+        }
+
+        .order-checkout__loading--box.show:after {
+            content: "";
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 3;
+        }
+
+
+        .step-sections {
+            position: relative;
+            z-index: 3;
+        }
+
+        @@media (max-width: 767px) {
+            .order-checkout__loading--box {
+                position: fixed;
+            }
+
+                .order-checkout__loading--box.show:after {
+                    display: none;
+                }
+        }
+
+
+        .order-checkout__loading--show .order-checkout__loading--box {
+            display: block;
+        }
+
+
+        @@-moz-keyframes spin {
+            100% {
+                -moz-transform: rotate(360deg);
+            }
+        }
+
+        @@-webkit-keyframes spin {
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @@keyframes spin {
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        .redeem-login {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .redeem-login-title {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+            .redeem-login-title h2 {
+                color: #333;
+                margin-right: 5px;
+            }
+
+        .redeem-login-btn a {
+            display: inline-block;
+            border-radius: 4px;
+            font-weight: 500;
+            padding: 13px 10px;
+            background: #338dbc;
+            color: #fff;
+            width: 82px;
+            text-align: center;
+        }
+
+        .redeem-form-used {
+            padding-top: 10px;
+        }
+
+        .btn-redeem-loading .btn-redeem-spinner {
+            -webkit-animation: rotate 0.5s linear infinite;
+            animation: rotate 0.5s linear infinite;
+            opacity: 1;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=" 100 ")";
+            filter: alpha(opacity=100);
+        }
+
+        .icon-redeem-button-spinner {
+            position: absolute;
+            top: 0;
+            opacity: 0;
+            right: -25px;
+            width: 12px;
+            height: 12px;
+            border: 2px solid #999999;
+            border-bottom-color: transparent;
+            border-radius: 100%;
+        }
+
+        .total-line-table-footer {
+            white-space: nowrap;
+        }
+
+        .row-align-top {
+            vertical-align: top;
+        }
+    </style>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2, user-scalable=no">
+    
+
+    
+
+   
+
+
+    
+
+    <!-- Global site tag (gtag.js) - Google Ads: 767364388 -->
+    <style>
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+    </style>
+   
+ 
+</head>
+<body>
+    @using (Html.BeginForm("CheckOut", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input id="is_vietnam_location" type="hidden" value="true" />
+        <div class="banner">
+            <div class="wrap">
+                <a href="/" class="logo">
+                    <h1 class="logo-text">Leaf Organic - Natural & Organic Care</h1>
+                </a>
+            </div>
+        </div>
+        <button class="order-summary-toggle order-summary-toggle-hide">
+            <div class="wrap">
+                <div class="order-summary-toggle-inner">
+                    <div class="order-summary-toggle-icon-wrapper">
+                        <svg width="20" height="19" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle-icon"><path d="M17.178 13.088H5.453c-.454 0-.91-.364-.91-.818L3.727 1.818H0V0h4.544c.455 0 .91.364.91.818l.09 1.272h13.45c.274 0 .547.09.73.364.18.182.27.454.18.727l-1.817 9.18c-.09.455-.455.728-.91.728zM6.27 11.27h10.09l1.454-7.362H5.634l.637 7.362zm.092 7.715c1.004 0 1.818-.813 1.818-1.817s-.814-1.818-1.818-1.818-1.818.814-1.818 1.818.814 1.817 1.818 1.817zm9.18 0c1.004 0 1.817-.813 1.817-1.817s-.814-1.818-1.818-1.818-1.818.814-1.818 1.818.814 1.817 1.818 1.817z"></path></svg>
+                    </div>
+                    <div class="order-summary-toggle-text order-summary-toggle-text-show">
+                        <span>Hiển thị thông tin đơn hàng</span>
+                        <svg width="11" height="6" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle-dropdown" fill="#000"><path d="M.504 1.813l4.358 3.845.496.438.496-.438 4.642-4.096L9.504.438 4.862 4.534h.992L1.496.69.504 1.812z"></path></svg>
+                    </div>
+                    <div class="order-summary-toggle-text order-summary-toggle-text-hide">
+                        <span>Ẩn thông tin đơn hàng</span>
+                        <svg width="11" height="7" xmlns="http://www.w3.org/2000/svg" class="order-summary-toggle-dropdown" fill="#000"><path d="M6.138.876L5.642.438l-.496.438L.504 4.972l.992 1.124L6.138 2l-.496.436 3.862 3.408.992-1.122L6.138.876z"></path></svg>
+                    </div>
+                    <div class="order-summary-toggle-total-recap" data-checkout-payment-due-target="13000000">
+                        <span class="total-recap-final-price" data-checkout-subtotal-price-target="@tamtinh">@String.Format("{0:0,0đ}", tamtinh)</span>
+                    </div>
+                </div>
+            </div>
+        </button>
+        <div class="content content-second">
+            <div class="wrap">
+                <div class="sidebar sidebar-second">
+                    <div class="sidebar-content">
+                        <div class="order-summary">
+                            <div class="order-summary-sections">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="wrap">
+                <div class="sidebar">
+                    <div class="sidebar-content">
+                        <div class="order-summary order-summary-is-collapsed">
+                            <h2 class="visually-hidden">Thông tin đơn hàng</h2>
+                            <div class="order-summary-sections">
+                                <div class="order-summary-section order-summary-section-product-list" data-order-summary-section="line-items">
+                                    <table class="product-table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><span class="visually-hidden">Hình ảnh</span></th>
+                                                <th scope="col"><span class="visually-hidden">Mô tả</span></th>
+                                                <th scope="col"><span class="visually-hidden">Số lượng</span></th>
+                                                <th scope="col"><span class="visually-hidden">Giá</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @for (var i = 0; i < Model.Count; i++)
+                                            {
+                                                <tr class="product">
+                                                    <td class="product-image">
+                                                        <div class="product-thumbnail">
+                                                            <div class="product-thumbnail-wrapper">
+                                                                <img class="product-thumbnail-image" alt="@Model[i].SanPham.TenSanPham" src="@Model[i].SanPham.HinhMinhHoa" />
+                                                            </div>
+                                                            <span class="product-thumbnail-quantity" aria-hidden="true">@Model[i].SoLuong</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="product-description">
+                                                        <span class="product-description-name order-summary-emphasis">@Model[i].SanPham.TenSanPham</span>
+                                                    </td>
+                                                    <td class="product-quantity visually-hidden">1</td>
+                                                    <td class="product-price">
+                                                        <span class="order-summary-emphasis">@String.Format("{0:0,0đ}", Model[i].DonGia)</span>
+                                                    </td>
+                                                </tr>
+                                            }
+                                            @*<tr class="product" data-product-id="1035099788" data-variant-id="1077125943">
+                                                    <td class="product-image">
+                                                        <div class="product-thumbnail">
+                                                            <div class="product-thumbnail-wrapper">
+                                                                <img class="product-thumbnail-image" alt="Bánh bao kẹp Stephanie hộp 200gr/4 chiếc" src="//product.hstatic.net/1000104489/product/z2677238425776_9c7f093a4bd15a523758a770339e5852_4e37533dc94f4a55a90e291af1411e4f_small.jpg" />
+                                                            </div>
+                                                            <span class="product-thumbnail-quantity" aria-hidden="true">1</span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="product-description">
+                                                        <span class="product-description-name order-summary-emphasis">Bánh bao kẹp Stephanie hộp 200gr/4 chiếc</span>
+                                                    </td>
+                                                    <td class="product-quantity visually-hidden">1</td>
+                                                    <td class="product-price">
+                                                        <span class="order-summary-emphasis">65,000₫</span>
+                                                    </td>
+                                                </tr>*@
+                                        </tbody>
+                                    </table>
+                                </div>
+                                @*<div class="order-summary-section order-summary-section-discount" data-order-summary-section="discount">
+                                        <form id="form_discount_add" accept-charset="UTF-8" method="post">
+                                            <input name="utf8" type="hidden" value="✓">
+                                            <div class="fieldset">
+                                                <div class="field  ">
+                                                    <div class="field-input-btn-wrapper">
+                                                        <div class="field-input-wrapper">
+                                                            <label class="field-label" for="discount.code">Mã giảm giá</label>
+                                                            <input placeholder="Mã giảm giá" class="field-input" data-discount-field="true" autocomplete="off" autocapitalize="off" spellcheck="false" size="30" type="text" id="discount.code" name="discount.code" value="" />
+                                                        </div>
+                                                        <button type="submit" class="field-input-btn btn btn-default btn-disabled">
+                                                            <span class="btn-content">Sử dụng</span>
+                                                            <i class="btn-spinner icon icon-button-spinner"></i>
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>*@
+                                <div class="order-summary-section order-summary-section-total-lines payment-lines" data-order-summary-section="payment-lines">
+                                    <table class="total-line-table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col"><span class="visually-hidden">Mô tả</span></th>
+                                                <th scope="col"><span class="visually-hidden">Giá</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="total-line total-line-subtotal">
+                                                <td class="total-line-name">Tạm tính</td>
+                                                <td class="total-line-price">
+                                                    <span class="order-summary-emphasis" data-checkout-subtotal-price-target="@tamtinh">
+                                                        @String.Format("{0:0,0đ}", tamtinh)
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr class="total-line total-line-shipping">
+                                                <td class="total-line-name">Phí vận chuyển</td>
+                                                <td class="total-line-price">
+                                                    <span class="order-summary-emphasis" data-checkout-total-shipping-target="0">
+                                                        35,000₫
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot class="total-line-table-footer">
+                                            <tr class="total-line">
+                                                <td class="total-line-name payment-due-label">
+                                                    <span class="payment-due-label-total">Tổng cộng</span>
+                                                </td>
+                                                <td class="total-line-name payment-due">
+                                                    <span class="payment-due-currency">VND</span>
+                                                    <span class="payment-due-price" data-checkout-payment-due-target="@tongtien">
+                                                        @String.Format("{0:0,0đ}", tongtien)
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main">
+                    <div class="main-header">
+                        <a href="/" class="logo">
+                            <h1 class="logo-text">Leaf Organic - Natural & Organic Care</h1>
+                        </a>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="@Url.Action("Orders", "Cart")">Giỏ hàng</a>
+                            </li>
+                            <li class="breadcrumb-item breadcrumb-item-current">
+                                Thông tin giao hàng
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="main-content">
+                        <div class="step">
+                            <div class="step-sections steps-onepage" step="1">
+                                <div class="section">
+                                    <div class="section-header">
+                                        <h2 class="section-title">Thông tin giao hàng</h2>
+                                    </div>
+                                    <div class="section-content section-customer-information no-mb">
+                                        <input type="hidden" name="checkout_user[email]" value="thinhphuongxa1@gmail.com" />
+                                        <div class="logged-in-customer-information">
+                                            <div class="logged-in-customer-information-avatar-wrapper">
+                                                <div class="logged-in-customer-information-avatar gravatar" style="background-image: url(//www.gravatar.com/avatar/cfad687ca5d09e818b7453c24150c026.jpg?s=100&d=blank);filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='//www.gravatar.com/avatar/cfad687ca5d09e818b7453c24150c026.jpg?s=100&d=blank', sizingMethod='scale')"></div>
+                                            </div>
+                                            <p class="logged-in-customer-information-paragraph">
+                                                @ViewBag.khachHang.TenKhachHang (@ViewBag.khachHang.Email)
+                                                <br />
+                                                <a href="@Url.Action("Logout", "Home")">Đăng xuất</a>
+                                            </p>
+                                        </div>
+                                        <div class="fieldset">
+                                            <div class="field   ">
+                                                <div class="field-input-wrapper">
+                                                    <label class="field-label" for="billing_address_full_name">Họ và tên</label>
+                                                    <input disabled placeholder="Họ và tên" autocapitalize="off" spellcheck="false" class="field-input" size="30" type="text" id="billing_address_full_name" name="billing_address[full_name]" value="@ViewBag.KhachHang.TenKhachHang" />
+                                                </div>
+                                            </div>
+                                            <div class="field field-required   ">
+                                                <div class="field-input-wrapper">
+                                                    <label class="field-label" for="billing_address_phone">Số điện thoại</label>
+                                                    <input disabled placeholder="Số điện thoại" autocapitalize="off" spellcheck="false" class="field-input" size="30" maxlength="15" type="tel" id="billing_address_phone" name="billing_address[phone]" value="@ViewBag.KhachHang.DienThoaiKhachHang" />
+                                                </div>
+                                            </div>
+                                            <div class="field   ">
+                                                <div class="field-input-wrapper">
+                                                    <label class="field-label" for="billing_address_address1">Địa chỉ</label>
+                                                    <input placeholder="Địa chỉ" autocapitalize="off" spellcheck="false" class="field-input" size="30" type="text" id="DiaChi" name="DiaChi" value="@ViewBag.KhachHang.DiaChiKhachHang" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="section-content">
+                                        <div class="fieldset">
+                                        </div>
+                                    </div>
+                                    <div id="change_pick_location_or_shipping">
+
+                                        <div id="section-payment-method" class="section">
+                                            <div class="section-header">
+                                                <h2 class="section-title">Phương thức thanh toán</h2>
+                                            </div>
+                                            <div class="section-content">
+                                                <div class="content-box">
+                                                    <div class="radio-wrapper content-box-row">
+                                                        <label class="radio-label" for="payment_method_id_247150">
+                                                            <div class="radio-input">
+                                                                <input id="payment_method_id_247150" class="input-radio" name="payment_method_id" type="radio" value="247150" checked />
+                                                            </div>
+                                                            <span class="radio-label-primary">Thanh toán khi giao hàng (COD)</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="section-header">
+                                                <h2 class="section-title">Ghi chú</h2>
+                                            </div>
+                                            <div class="section-content field field-input fieldset">
+                                                <div class="field   ">
+                                                    <div class="field-input-wrapper">
+                                                        <input type="text" style='height:85px' id="note" class='field-input' name="GhiChu" rows="8" cols="50" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step-footer">
+                                <input type="submit" class="btn btn-content" value="Hoàn tất đơn hàng" onclick="return ValidatInformation()" />
+                                <a class="step-footer-previous-link" href="@Url.Action("Orders", "Cart")">
+                                    <svg class="previous-link-icon icon-chevron icon" xmlns="http://www.w3.org/2000/svg" width="6.7" height="11.3" viewBox="0 0 6.7 11.3"><path d="M6.7 1.1l-1-1.1-4.6 4.6-1.1 1.1 1.1 1 4.6 4.6 1-1-4.6-4.6z"></path></svg>
+                                    Giỏ hàng
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-footer footer-powered-by">
+                        Powered by Haravan
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <script>
+        function ValidatInformation() {
+            var ghichu = document.getElementById('DiaChi');
+            if (ghichu.value == "") {
+                alert('Địa chỉ KHÔNG được để trống!!!');
+                ghichu.focus();
+                return false;
+            } else {
+                var result = confirm('Bạn có chắc chắn muốn đặt hàng?')
+                if (result) {
+                    alert('Đặt hàng THÀNH CÔNG!!!')
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
